@@ -1,5 +1,7 @@
 {
   "name": "telegramClone",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
