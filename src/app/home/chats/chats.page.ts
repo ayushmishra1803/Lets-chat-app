@@ -12,31 +12,31 @@ export class ChatsPage implements OnInit {
       userimg: "/assets/chats/user.jfif",
       username: "Ayush Mishra",
       Date: "Mon",
-      lastText:"Ok"
+      lastText: "Whats up",
     },
     {
       userimg: "/assets/chats/user.jfif",
       username: "Ayush Mishra",
       Date: "Mon",
-      lastText:"Ok"
+      lastText: "How are you",
     },
     {
       userimg: "/assets/chats/user.jfif",
       username: "Ayush Mishra",
       Date: "Mon",
-      lastText:"Ok"
+      lastText: "Ok",
     },
     {
       userimg: "/assets/chats/user.jfif",
       username: "Ayush Mishra",
       Date: "Mon",
-      lastText:"Ok"
+      lastText: "Ok",
     },
     {
       userimg: "/assets/chats/user.jfif",
       username: "Ayush Mishra",
       Date: "Mon",
-      lastText:"Ok"
+      lastText: "Ok",
     },
   ];
   ngOnInit() {}
