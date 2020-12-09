@@ -17,7 +17,7 @@ ion-searchbar {
   --background: rgb(34, 34, 34);
   font-family: "Roboto Mono", monospace;
   color: white;
-  border-radius: 20px;
+  --border-radius: 10px;
 }
 .list {
   background-color: black;
