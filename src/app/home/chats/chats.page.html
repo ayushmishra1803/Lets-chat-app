@@ -1,9 +1,64 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>chats</ion-title>
+    <div class="toolbar">
+      <section>
+        <span style="color: white">Edit</span>
+      </section>
+      <section>
+        <span style="color: white">Chats</span>
+      </section>
+      <section>
+        <ion-icon
+          name="add-outline"
+          color="light"
+          style="font-size: 16px"
+        ></ion-icon>
+      </section>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <section style="width: 100%; display: flex; justify-content: center">
+    <ion-searchbar
+      style="width: 90%"
+      placeholder="    Search for users"
+    ></ion-searchbar>
+  </section>
+  <div class="list" *ngFor="let user of userchat">
+    <div class="listiteams">
+      <section style="display: flex; width: 70%; height: 100%">
+        <section>
+          <ion-avatar style="height: 55px; width: 55px">
+            <ion-img [src]="user.userimg"> </ion-img>
+          </ion-avatar>
+        </section>
+        <section
+          style="
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 16px;
+          "
+        >
+          <section><span class="username">{{user.username}}</span></section>
+          <section><span class="usermessage">{{user.lastText}}</span></section>
+        </section>
+      </section>
 
+      <section
+        style="
+          width: 30%;
+          height: 100%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-start;
+        "
+      >
+        <span class="messageData"> {{user.Date}} </span>
+      </section>
+    </div>
+    <div><hr style="background-color: #f05d81; height: 2px; width: 95%" /></div>
+  </div>
 </ion-content>

@@ -1,0 +1,49 @@
+ion-content {
+  --background: black;
+}
+.userImage {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+.username {
+  color: white;
+  font-size: 20px;
+  font-family: Roboto Mono, monospace;
+  margin-top: 8px;
+}
+.userData {
+  color: white;
+  font-size: 16px;
+  font-family: Roboto Mono, monospace;
+  margin-top: 2px;
+}
+.editableblocks {
+  background-color: rgb(34, 34, 34);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 10px;
+  margin-top: 64px;
+ 
+}
+.options{
+  
+  padding-left: 12px;
+  color: white;
+  font-size: 16px;
+  font-family: Roboto Mono, monospace;
+}
+.seceditableblock{
+  background-color: rgb(34, 34, 34);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 10px;
+  margin-top: 32px;
+}
