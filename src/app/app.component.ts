@@ -4,6 +4,7 @@ import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic";
+import { FcmTokenService } from "./Service/tokenService/fcm-token.service";
 
 @Component({
   selector: "app-root",
@@ -15,7 +16,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-
+    private fcmToken: FcmTokenService
   ) {
     this.initializeApp();
   }
@@ -25,19 +26,19 @@ export class AppComponent {
       this.tokenInit();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-   
     });
   }
 
   //This Method is responsible for the fcm token used for Push notifications
   tokenInit() {
-
-    FCM.getToken().then((token) => {
-      console.log(token);
-    }).catch(err=>{console.log(err);
-    })
-
-   
+    FCM.getToken()
+      .then((token) => {
+        console.log(token);
+        this.fcmToken.setToken(token);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     // FCM.onTokenRefresh().subscribe(token => {
     //  console.log(token);
@@ -49,7 +50,5 @@ export class AppComponent {
         console.log("Has permission!");
       }
     });
-
-
   }
 }

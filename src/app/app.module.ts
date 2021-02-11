@@ -12,8 +12,9 @@ import { AngularFireModule } from "@angular/fire";
 import { environment } from "src/environments/environment.prod";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { LoadingComponent } from "./components/loading/loading.component";
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,LoadingComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

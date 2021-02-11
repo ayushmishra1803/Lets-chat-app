@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
   OnLoginSubmit(f: NgForm) {
-    console.log(f);
+   this.loginService.userLogin(f.value.email,f.value.password)
   }
   navigateToSignUp() {
     this.Router.navigate(["/sign-up"]);
