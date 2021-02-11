@@ -31,3 +31,15 @@ html,
 body {
   font-family: "Roboto Mono", monospace;
 }
+ion-content {
+  --background: black;
+  font-family: "Roboto Mono", monospace;
+}
+ion-toolbar {
+  --background: rgb(34, 34, 34);
+  font-family: "Roboto Mono", monospace;
+}
+ion-card{
+  --background: rgb(34, 34, 34);
+  font-family: "Roboto Mono", monospace;
+}

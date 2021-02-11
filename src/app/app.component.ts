@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
-import { FCM } from "@ionic-native/fcm/ngx";
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic";
 
 @Component({
   selector: "app-root",
@@ -15,42 +15,41 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private fcm: FCM
+
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.tokenInit();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.tokenInit();
+   
     });
   }
+
+  //This Method is responsible for the fcm token used for Push notifications
   tokenInit() {
-    this.fcm.getToken().then((token) => {
+
+    FCM.getToken().then((token) => {
       console.log(token);
-    });
+    }).catch(err=>{console.log(err);
+    })
 
-    this.fcm.onNotification().subscribe((data) => {
-      if (data.wasTapped) {
-        console.log("Received in background");
-      } else {
-        console.log("Received in foreground");
-      }
-    });
+   
 
-    // this.fcm.onTokenRefresh().subscribe(token => {
+    // FCM.onTokenRefresh().subscribe(token => {
     //  console.log(token);
 
     // });
 
-    this.fcm.hasPermission().then((hasPermission) => {
+    FCM.hasPermission().then((hasPermission) => {
       if (hasPermission) {
         console.log("Has permission!");
       }
     });
 
-    this.fcm.clearAllNotifications();
+
   }
 }

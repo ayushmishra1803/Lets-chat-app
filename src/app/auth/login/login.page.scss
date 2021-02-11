@@ -1,0 +1,53 @@
+ion-content {
+  width: 100%;
+  height: 100%;
+}
+.imageDiv {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.img {
+  width: 40%;
+}
+.headingDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+
+}
+ion-card {
+  width: 90%;
+}
+
+ion-item {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin: 0 !important;
+  padding: 0 !important;
+  --background: rgb(34, 34, 34);
+}
+ion-button {
+  margin-top: 2%;
+  width: 40%;
+  font-family: "Roboto Mono", monospace;
+}
+.btnDiv {
+  margin-top: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5%;
+}
+.loginheading{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.cardDiv{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
