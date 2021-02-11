@@ -13,6 +13,7 @@ import { environment } from "src/environments/environment.prod";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { LoadingComponent } from "./components/loading/loading.component";
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [AppComponent,LoadingComponent],
   entryComponents: [],
@@ -22,7 +23,7 @@ import { LoadingComponent } from "./components/loading/loading.component";
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule,
+    AngularFireAuthModule,IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
