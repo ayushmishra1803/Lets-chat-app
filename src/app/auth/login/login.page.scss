@@ -7,7 +7,7 @@ ion-content {
   justify-content: center;
   width: 100%;
   margin-top: 10%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 .img {
   width: 40%;
@@ -17,15 +17,14 @@ ion-content {
   display: flex;
   justify-content: center;
   margin-top: 5%;
-
 }
 ion-card {
   width: 90%;
 }
 
 ion-item {
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
   margin: 0 !important;
   padding: 0 !important;
   --background: rgb(34, 34, 34);
@@ -42,12 +41,35 @@ ion-button {
   justify-content: center;
   margin-bottom: 5%;
 }
-.loginheading{
-    margin-top: 2%;
-    margin-bottom: 2%;
+.loginheading {
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
-.cardDiv{
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.cardDiv {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.forgotPassword {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5%;
+  margin-top: 1%;
+  color: #f05d81;
+  font-size: 12px;
+}
+.signUpDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  .newHereSpan {
+    font-size: 13px;
+    color: white;
+  }
+  .siginUpSpan {
+    font-size: 13px;
+    color: #f05d81;
+  }
 }
