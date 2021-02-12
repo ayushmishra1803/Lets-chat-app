@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "letschat-3f883": {
+      "hosting": {
+        "app": [
+          "letschat-3f883"
+        ]
+      }
+    }
+  }
+}

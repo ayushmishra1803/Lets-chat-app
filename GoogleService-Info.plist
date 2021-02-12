@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>628692925534-erp2i3okq5vos7sd4iq47fnq45peughl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.628692925534-erp2i3okq5vos7sd4iq47fnq45peughl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>628692925534-c1v9pif8q59btjafuhjj80mumjdatm3m.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB6n1PkyL_mOS2CuOU7mO-YwzLIMAfD9zg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>628692925534</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.LetsChat.app</string>
+	<key>PROJECT_ID</key>
+	<string>letschat-3f883</string>
+	<key>STORAGE_BUCKET</key>
+	<string>letschat-3f883.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:628692925534:ios:5474c11d155054dbcc88cf</string>
+</dict>
+</plist>
