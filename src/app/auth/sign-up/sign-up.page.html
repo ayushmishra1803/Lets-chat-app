@@ -20,7 +20,6 @@
                 formControlName="first_name"
                 type="text"
                 style="color: white"
-                
               ></ion-input>
             </ion-item>
             <ion-item>
@@ -34,15 +33,34 @@
               ></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="floating" style="color: white"
-                >Username</ion-label
-              >
-              <ion-input
-                required
-                type="text"
-                style="color: white"
-                formControlName="username"
-              ></ion-input>
+              <div class="errorDiv">
+                <section>
+                  <ion-label position="floating" style="color: white"
+                    >Username</ion-label
+                  >
+                  <ion-input
+                    required
+                    type="text"
+                    style="color: white"
+                    formControlName="username"
+                    (keyup)="checkUsername($event)"
+                  ></ion-input>
+                  <div>
+                    <ion-label
+                      color="danger"
+                      style="font-size: 12px"
+                      *ngIf="invalidUsername && userForm.controls.username.touched"
+                      >Username should be unique</ion-label
+                    >
+                  </div>
+                </section>
+                <section
+                  style="display: flex; height: 100%; align-items: center"
+                  *ngIf="loadingUsername"
+                >
+                  <ion-spinner color="primary"></ion-spinner>
+                </section>
+              </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating" style="color: white"
@@ -81,7 +99,7 @@
             <ion-button
               type="submit"
               color="primary"
-              [disabled]="userForm.invalid"
+              [disabled]="userForm.invalid || invalidUsername"
             >
               SignUp</ion-button
             >
