@@ -63,14 +63,34 @@
               </div>
             </ion-item>
             <ion-item>
-              <ion-label position="floating" style="color: white"
-                >Mobile Number</ion-label
-              >
-              <ion-input
-                type="tel"
-                style="color: white"
-                formControlName="mobile_number"
-              ></ion-input>
+              <div class="errorDiv">
+                <section>
+                  <ion-label position="floating" style="color: white"
+                    >Mobile Number</ion-label
+                  >
+                  <ion-input
+                    required
+                    type="text"
+                    style="color: white"
+                    formControlName="mobile_number"
+                    (keyup)="checkMobileNumber($event)"
+                  ></ion-input>
+                  <div>
+                    <ion-label
+                      color="danger"
+                      style="font-size: 12px"
+                      *ngIf="invalidMobileNumnber && userForm.controls.mobile_number.touched"
+                      >Already Registered Try Another!!</ion-label
+                    >
+                  </div>
+                </section>
+                <section
+                  style="display: flex; height: 100%; align-items: center"
+                  *ngIf="loadingMobileNumber"
+                >
+                  <ion-spinner color="primary"></ion-spinner>
+                </section>
+              </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating" style="color: white"

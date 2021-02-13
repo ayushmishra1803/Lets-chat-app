@@ -22,6 +22,9 @@ export class SignUpPage implements OnInit {
   invalidUsername = true;
   loadingUsername = false;
   usernameSubscription: Subscription;
+  loadingMobileNumber = false;
+  invalidMobileNumnber = true;
+  mobileNumberSubscription: Subscription;
   ngOnInit() {
     this.userForm = new FormGroup({
       first_name: new FormControl("", [Validators.required]),
@@ -74,7 +77,18 @@ export class SignUpPage implements OnInit {
         : (this.invalidUsername = false);
     });
   }
-  checkMobileNumber() {
-    this.angularFire.collection("users");
+  checkMobileNumber(event) {
+    this.loadingMobileNumber = true;
+    this.mobileNumberSubscription = this.ValidationService.checkingValidation(
+      "mobileNumber",
+      event.target.value
+    ).subscribe((result) => {
+      console.log(result);
+
+      this.loadingMobileNumber = false;
+      result.length
+        ? (this.invalidMobileNumnber = true)
+        : (this.invalidMobileNumnber = false);
+    });
   }
 }

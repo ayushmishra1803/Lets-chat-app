@@ -44,6 +44,13 @@ export class AppComponent {
     //  console.log(token);
 
     // });
+    FCM.onNotification().subscribe((data) => {
+      if (data.wasTapped) {
+        console.log("Received in background");
+      } else {
+        console.log("Received in foreground");
+      }
+    });
 
     FCM.hasPermission().then((hasPermission) => {
       if (hasPermission) {
