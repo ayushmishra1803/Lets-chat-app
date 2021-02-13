@@ -40,8 +40,9 @@ export class LoginService {
                   id: doc.id,
                   ...data,
                 };
-                console.log(userData);
+                //console.log(userData);
                 this.userData.setuserData(userData);
+                this.userData.setLoginStatus(true);
                 this.loader.hideLoader();
                 this.router.navigate(["/home/chats"], { replaceUrl: true });
                 if (userData.fcmToken === "") {

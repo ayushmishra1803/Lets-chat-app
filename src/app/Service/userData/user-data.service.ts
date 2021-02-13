@@ -6,12 +6,13 @@ import { Storage } from "@ionic/storage";
 export class UserDataService {
   constructor(private storage: Storage) {}
   userData;
+  loginStatus=false
   setuserData(userData) {
     this.userData = userData;
     this.storage
       .set("userData", userData)
       .then((stored) => {
-        //console.log(stored);
+       
       })
       .catch((err) => {
         console.log(err);
@@ -25,8 +26,14 @@ export class UserDataService {
       .get("userData")
       .then((fetched) => {
         this.userData = fetched;
-        console.log(fetched);
+      
       })
       .catch((err) => {});
+  }
+  getloginStatus(){
+    return this.loginStatus
+  }
+  setLoginStatus(status){
+    this.loginStatus=status
   }
 }

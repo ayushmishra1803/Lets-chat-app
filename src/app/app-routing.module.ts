@@ -1,34 +1,44 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { AuthChildGuard } from "./guards/AuthChild/auth-child.guard";
+import { AuthGuardGuard } from "./guards/AuthGuard/auth-guard.guard";
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: "home",
+    loadChildren: () =>
+      import("./home/home.module").then((m) => m.HomePageModule),
+    canActivate: [AuthGuardGuard],canActivateChild:[AuthChildGuard]
   },
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full",
   },
   {
-    path: 'login',
-    loadChildren: () => import('./auth/login/login.module').then( m => m.LoginPageModule)
+    path: "login",
+    loadChildren: () =>
+      import("./auth/login/login.module").then((m) => m.LoginPageModule),
   },
   {
-    path: 'sign-up',
-    loadChildren: () => import('./auth/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+    path: "sign-up",
+    loadChildren: () =>
+      import("./auth/sign-up/sign-up.module").then((m) => m.SignUpPageModule),
   },
   {
-    path: 'forgot-password',
-    loadChildren: () => import('./auth/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    path: "forgot-password",
+    loadChildren: () =>
+      import("./auth/forgot-password/forgot-password.module").then(
+        (m) => m.ForgotPasswordPageModule
+      ),
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuardGuard,AuthChildGuard],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
