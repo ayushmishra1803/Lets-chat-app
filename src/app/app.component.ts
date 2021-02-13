@@ -6,6 +6,9 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic";
 import { FcmTokenService } from "./Service/tokenService/fcm-token.service";
 
+import { Storage } from "@ionic/storage";
+import { Router } from "@angular/router";
+import { UserDataService } from "./Service/userData/user-data.service";
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
@@ -16,19 +19,39 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private fcmToken: FcmTokenService
+    private fcmToken: FcmTokenService,
+    private Storage: Storage,
+    private router: Router,
+    private userData: UserDataService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.checkLoginStatus();
       this.tokenInit();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
+  checkLoginStatus() {
+    this.Storage.get("userData")
+      .then((result) => {
+        if (result == null) {
+          this.userData.setLoginStatus(false);
+          this.router.navigate(["/login"], { replaceUrl: true });
+        } else {
+          this.userData.setLoginStatus(true);
+          this.userData.setuserData(result);
+          this.router.navigate(["/home/chats"], { replaceUrl: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   //This Method is responsible for the fcm token used for Push notifications
   tokenInit() {
     FCM.getToken()
@@ -40,10 +63,6 @@ export class AppComponent {
         console.log(err);
       });
 
-    // FCM.onTokenRefresh().subscribe(token => {
-    //  console.log(token);
-
-    // });
     FCM.onNotification().subscribe((data) => {
       if (data.wasTapped) {
         console.log("Received in background");
