@@ -8,14 +8,16 @@ import { ContactsPageRoutingModule } from './contacts-routing.module';
 
 import { ContactsPage } from './contacts.page';
 import { Contacts } from '@ionic-native/contacts/ngx';
+import { ContactService } from 'src/app/Service/contact/contact.service';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ContactsPageRoutingModule
+    ContactsPageRoutingModule,AngularFirestoreModule
   ],
-  declarations: [ContactsPage],providers:[Contacts]
+  declarations: [ContactsPage],providers:[Contacts,ContactService]
 })
 export class ContactsPageModule {}
