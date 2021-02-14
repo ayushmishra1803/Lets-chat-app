@@ -7,9 +7,9 @@ import { AngularFirestore } from "@angular/fire/firestore";
 export class ContactService {
   constructor(private angularfire: AngularFirestore) {}
   getContactonApp() {
-    this.angularfire.collection("users").valueChanges().subscribe(users=>{
-      console.log(users);
-      
-    })
+   return this.angularfire.collection("users").get()
+  }
+  getLengthOfDataFromDb(){
+    return this.angularfire.collection('users').valueChanges();
   }
 }
