@@ -19,6 +19,8 @@ export class ContactsPage implements OnInit {
   dbContactsSubscription: Subscription;
   dbContactlistUser: any[] = [];
   dbLengthSubscription: Subscription;
+  UsersOnApp: any[];
+  UsersNotonApp: any[];
   userContactList: any[] = [];
   dbLength: number;
   ngOnInit() {
@@ -56,7 +58,7 @@ export class ContactsPage implements OnInit {
           console.log(this.dbContactlistUser);
           if (indexValue == this.dbLength) {
             console.log("Equal");
-            this.fetchUserContacts()
+            this.fetchUserContacts();
           }
           if (indexValue != this.dbLength) {
             let oldValue = indexValue;
@@ -77,19 +79,47 @@ export class ContactsPage implements OnInit {
     this.contact.find(["*"], options).then((contacts) => {
       this.userContacts = contacts;
       this.userContacts.map((contact) => {
-       let userContact=contact
-        contact.phoneNumbers.map(userContactNumber=>{
-          const conactNumber=userContactNumber
+        let userContact = contact;
+        contact.phoneNumbers.map((userContactNumber) => {
+          const conactNumber = userContactNumber;
           //dataBaseUsers
-          this.dbContactlistUser.map(dbUsers=>{
-            if(userContactNumber.value[0]+userContactNumber.value[1]+userContactNumber.value[2] === "+91"){
-              userContactNumber.value=userContactNumber.value.substring(3).trim()
-              console.log(userContactNumber);
-              
+          this.dbContactlistUser.map((dbUsers) => {
+            if (
+              userContactNumber.value[0] +
+                userContactNumber.value[1] +
+                userContactNumber.value[2] ===
+              "+91"
+            ) {
+              userContactNumber.value = userContactNumber.value
+                .substring(3)
+                .trim();
+              //console.log(userContactNumber);
+              if (dbUsers.mobileNumber === userContactNumber.value) {
+                this.UsersOnApp.push({
+                  dbDeatils: { ...dbUsers },
+                  conatctInfo: { ...userContact },
+                });
+              } else {
+                this.UsersNotonApp.push({
+                  conatctInfo: { ...userContact },
+                });
+              }
+            } else {
+              if (dbUsers.mobileNumber === userContactNumber.value) {
+                this.UsersOnApp.push({
+                  dbDeatils: { ...dbUsers },
+                  conatctInfo: { ...userContact },
+                });
+              } else {
+                this.UsersNotonApp.push({
+                  conatctInfo: { ...userContact },
+                });
+              }
             }
-          })
-         
-        })
+            console.log(this.UsersOnApp);
+           // console.log(this.UsersNotonApp);
+          });
+        });
       });
     });
   }
