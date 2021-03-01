@@ -3,7 +3,6 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Contacts } from "@ionic-native/contacts/ngx";
 import { Subscription } from "rxjs";
 import { ContactService } from "src/app/Service/contact/contact.service";
-import { map } from "rxjs/operators";
 @Component({
   selector: "app-contacts",
   templateUrl: "./contacts.page.html",
