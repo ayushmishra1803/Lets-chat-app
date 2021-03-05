@@ -32,7 +32,12 @@ export class ContactsPage implements OnInit {
         this.getDbUserData();
       });
   }
+  /*
+  
   //this method is responsible for getting Dbusers information
+  
+  
+  */
   getDbUserData() {
     this.dbContactsSubscription = this.contactService
 
@@ -116,7 +121,7 @@ export class ContactsPage implements OnInit {
               }
             }
             console.log(this.UsersOnApp);
-           // console.log(this.UsersNotonApp);
+            // console.log(this.UsersNotonApp);
           });
         });
       });
