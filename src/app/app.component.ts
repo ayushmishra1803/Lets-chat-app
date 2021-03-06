@@ -29,7 +29,12 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.checkLoginStatus();
+     this.checkLoginStatus();
+     /*
+     use this for loging  out user currently
+     
+     //this.Storage.set('userData',null) 
+     */
       this.tokenInit();
       this.statusBar.styleDefault();
       this.splashScreen.hide();

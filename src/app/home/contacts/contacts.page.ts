@@ -3,6 +3,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Contacts } from "@ionic-native/contacts/ngx";
 import { Subscription } from "rxjs";
 import { ContactService } from "src/app/Service/contact/contact.service";
+import { UserDataService } from "src/app/Service/userData/user-data.service";
 @Component({
   selector: "app-contacts",
   templateUrl: "./contacts.page.html",
@@ -12,7 +13,8 @@ export class ContactsPage implements OnInit {
   constructor(
     private contact: Contacts,
     private contactService: ContactService,
-    private fireStore: AngularFirestore
+    private fireStore: AngularFirestore,
+    private userData: UserDataService
   ) {}
   userContacts: any[] = [];
   dbContactsSubscription: Subscription;
@@ -23,6 +25,7 @@ export class ContactsPage implements OnInit {
   userContactList: any[] = [];
   dbLength: number;
   ngOnInit() {
+    console.log(this.userData.getUserData());
     this.dbLengthSubscription = this.contactService
       .getLengthOfDataFromDb()
       .subscribe((res) => {
@@ -34,13 +37,12 @@ export class ContactsPage implements OnInit {
   }
   /*
   
-  //this method is responsible for getting Dbusers information
+  this method is responsible for getting Dbusers information
   
   
   */
   getDbUserData() {
     this.dbContactsSubscription = this.contactService
-
       .getContactonApp()
 
       .subscribe((res) => {
@@ -62,7 +64,7 @@ export class ContactsPage implements OnInit {
           console.log(this.dbContactlistUser);
           if (indexValue == this.dbLength) {
             console.log("Equal");
-            this.fetchUserContacts();
+            //  this.fetchUserContacts();
           }
           if (indexValue != this.dbLength) {
             let oldValue = indexValue;
@@ -73,7 +75,9 @@ export class ContactsPage implements OnInit {
         });
       });
   }
-  //this Method is responsible for fetching user Contact List
+  /*
+  this Method is responsible for fetching user Contact List
+  */ 
   fetchUserContacts() {
     let options = {
       filter: "",
