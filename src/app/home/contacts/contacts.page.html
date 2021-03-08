@@ -11,6 +11,13 @@
       placeholder=" Quick Search"
     ></ion-searchbar>
   </div>
+  <section>
+    <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
+  </section>
+  <span class="smallHeading">Lets Chat</span>
+  <section>
+    <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
+  </section>
   <div class="list" *ngFor="let conatct of UsersOnApp">
     <div class="listiteams">
       <section
@@ -55,7 +62,13 @@
     </div>
   </div>
   <div class="userNotOnApp">
-    <span style="color: white;">Invite</span>
+    <section>
+      <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
+    </section>
+    <span class='smallHeading' >Invite</span>
+    <section>
+      <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
+    </section>
     <div class="list" *ngFor="let conatct of UsersNotonApp">
       <div class="listiteams">
         <section
@@ -91,6 +104,13 @@
                   >{{conatct.mobileData._objectInstance.phoneNumbers[0].value}}</span
                 >
               </section>
+              
+            </section>
+            <section style="width: 100%;">
+              <div style="display: flex; justify-content: flex-end;">
+                <ion-button color="primary"> Invite</ion-button>
+              </div>
+             
             </section>
           </section>
           <section>
