@@ -20,17 +20,15 @@ export class ContactsPage implements OnInit {
   dbContactsSubscription: Subscription;
   dbContactlistUser: any[] = [];
   dbLengthSubscription: Subscription;
-  UsersOnApp: any[];
-  UsersNotonApp: any[];
+  UsersOnApp: any[]=[];
+  UsersNotonApp: any[]=[];
   userContactList: any[] = [];
   dbLength: number;
   ngOnInit() {
-    console.log(this.userData.getUserData());
     this.dbLengthSubscription = this.contactService
       .getLengthOfDataFromDb()
       .subscribe((res) => {
         this.dbLength = res.length;
-        console.log(this.dbLength);
 
         this.getDbUserData();
       });
@@ -61,15 +59,12 @@ export class ContactsPage implements OnInit {
 
           this.dbContactlistUser.push(data);
 
-          console.log(this.dbContactlistUser);
-          if (indexValue == this.dbLength) {
-            console.log("Equal");
-            //  this.fetchUserContacts();
+          if (indexValue == this.dbLength - 1) {
+            this.fetchUserContacts();
           }
           if (indexValue != this.dbLength) {
             let oldValue = indexValue;
 
-            console.log(indexValue);
             indexValue = oldValue + 1;
           }
         });
@@ -77,7 +72,7 @@ export class ContactsPage implements OnInit {
   }
   /*
   this Method is responsible for fetching user Contact List
-  */ 
+  */
   fetchUserContacts() {
     let options = {
       filter: "",
@@ -85,47 +80,35 @@ export class ContactsPage implements OnInit {
       hasPhoneNumber: true,
     };
     this.contact.find(["*"], options).then((contacts) => {
-      this.userContacts = contacts;
-      this.userContacts.map((contact) => {
-        let userContact = contact;
-        contact.phoneNumbers.map((userContactNumber) => {
-          const conactNumber = userContactNumber;
-          //dataBaseUsers
-          this.dbContactlistUser.map((dbUsers) => {
-            if (
-              userContactNumber.value[0] +
-                userContactNumber.value[1] +
-                userContactNumber.value[2] ===
-              "+91"
-            ) {
-              userContactNumber.value = userContactNumber.value
-                .substring(3)
-                .trim();
-              //console.log(userContactNumber);
-              if (dbUsers.mobileNumber === userContactNumber.value) {
-                this.UsersOnApp.push({
-                  dbDeatils: { ...dbUsers },
-                  conatctInfo: { ...userContact },
-                });
-              } else {
-                this.UsersNotonApp.push({
-                  conatctInfo: { ...userContact },
-                });
+      let userAllContacts = [];
+      userAllContacts = contacts;
+
+      userAllContacts.map((conatct) => {
+        const currentConact = conatct;
+        conatct.phoneNumbers.map((number, phonenumberIndex) => {
+          if (number.value[0] + number.value[1] + number.value[2] === "+91") {
+            //
+            currentConact.phoneNumbers.value = number.value.slice(3);
+
+            //
+            //
+          }
+
+          this.dbContactlistUser.map((userontheApp) => {
+            if (currentConact.phoneNumbers.value != undefined) {
+              if (
+                userontheApp.mobileNumber ===
+                currentConact.phoneNumbers.value.replace(/\s+/g, "")
+              ) {
+                
+                this.UsersOnApp.push({mobileData:{...currentConact},dbData:{...userontheApp}})
+                console.log(  this.UsersOnApp);
+                
               }
-            } else {
-              if (dbUsers.mobileNumber === userContactNumber.value) {
-                this.UsersOnApp.push({
-                  dbDeatils: { ...dbUsers },
-                  conatctInfo: { ...userContact },
-                });
-              } else {
-                this.UsersNotonApp.push({
-                  conatctInfo: { ...userContact },
-                });
+              else{
+              this.UsersNotonApp.push({mobileData:{...currentConact},dbData:{...userontheApp}})
               }
             }
-            console.log(this.UsersOnApp);
-            // console.log(this.UsersNotonApp);
           });
         });
       });

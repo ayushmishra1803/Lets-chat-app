@@ -11,7 +11,7 @@
       placeholder=" Quick Search"
     ></ion-searchbar>
   </div>
-  <div class="list" *ngFor="let conatct of userContacts">
+  <div class="list" *ngFor="let conatct of UsersOnApp">
     <div class="listiteams">
       <section
         style="
@@ -37,10 +37,14 @@
             "
           >
             <section>
-              <span class="username">{{conatct.displayName}}</span>
+              <span class="username"
+                >{{conatct.mobileData._objectInstance.displayName}}</span
+              >
             </section>
             <section>
-              <span class="userNumber">{{conatct.phoneNumbers[0].value}}</span>
+              <span class="userNumber"
+                >{{conatct.mobileData._objectInstance.phoneNumbers[0].value}}</span
+              >
             </section>
           </section>
         </section>
@@ -48,6 +52,52 @@
           <hr style="background-color: #f05d81; height: 2px; width: 95%" />
         </section>
       </section>
+    </div>
+  </div>
+  <div class="userNotOnApp">
+    <span style="color: white;">Invite</span>
+    <div class="list" *ngFor="let conatct of UsersNotonApp">
+      <div class="listiteams">
+        <section
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+          "
+        >
+          <section style="display: flex; width: 100%; height: 100%">
+            <section>
+              <ion-avatar>
+                <ion-img src="/assets/chats/user.jfif"> </ion-img>
+              </ion-avatar>
+            </section>
+            <section
+              style="
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 16px;
+              "
+            >
+              <section>
+                <span class="username"
+                  >{{conatct.mobileData._objectInstance.displayName}}</span
+                >
+              </section>
+              <section>
+                <span class="userNumber"
+                  >{{conatct.mobileData._objectInstance.phoneNumbers[0].value}}</span
+                >
+              </section>
+            </section>
+          </section>
+          <section>
+            <hr style="background-color: #f05d81; height: 2px; width: 95%" />
+          </section>
+        </section>
+      </div>
     </div>
   </div>
 </ion-content>
