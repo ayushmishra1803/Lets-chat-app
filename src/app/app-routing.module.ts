@@ -32,6 +32,10 @@ const routes: Routes = [
         (m) => m.ForgotPasswordPageModule
       ),
   },
+  {
+    path: 'chating/:uuid',
+    loadChildren: () => import('./home/chating/chating.module').then( m => m.ChatingPageModule)
+  },
 ];
 
 @NgModule({

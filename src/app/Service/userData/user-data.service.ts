@@ -36,4 +36,5 @@ export class UserDataService {
   setLoginStatus(status){
     this.loginStatus=status
   }
+
 }

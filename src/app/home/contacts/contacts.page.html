@@ -19,7 +19,7 @@
     <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
   </section>
   <div class="list" *ngFor="let conatct of UsersOnApp">
-    <div class="listiteams">
+    <div class="listiteams" (click)="GotChat(conatct)">
       <section
         style="
           display: flex;

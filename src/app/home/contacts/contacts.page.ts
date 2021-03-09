@@ -9,6 +9,7 @@ import { LoadingService } from "src/app/Service/loading/loading.service";
 import { UserDataService } from "src/app/Service/userData/user-data.service";
 
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-contacts",
   templateUrl: "./contacts.page.html",
@@ -20,7 +21,7 @@ export class ContactsPage implements OnInit {
     private contactService: ContactService,
     private fireStore: AngularFirestore,
     private userData: UserDataService,
-    private loading: LoadingService,private socailSharing:SocialSharing
+    private loading: LoadingService,private socailSharing:SocialSharing,private router:Router
   ) {}
   userContacts: any[] = [];
   dbContactsSubscription: Subscription;
@@ -128,5 +129,10 @@ export class ContactsPage implements OnInit {
   }
   inviteOthers(){
     this.socailSharing.share("Sharing The Latest Chat App","Lets Chat",null,"google.com").then(res=>{}).catch(err=>{})
+  }
+  GotChat(contact){
+    console.log(contact);
+    this.router.navigate(['/chating/'+contact.dbData.id])
+    
   }
 }

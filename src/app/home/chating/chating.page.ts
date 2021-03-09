@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UsersDatafromFirebaseService } from 'src/app/Service/fetchingUsersDataFromFirebase/users-datafrom-firebase.service';
 
 @Component({
   selector: 'app-chating',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatingPage implements OnInit {
 
-  constructor() { }
+  constructor(private activatedRoute:ActivatedRoute,private gettinguserDataService:UsersDatafromFirebaseService) { }
 
   ngOnInit() {
-  }
+    this.activatedRoute.params.subscribe(uuid=>{
+      console.log(uuid.uuid);
+      this.gettinguserDataService.getUserByuuid(uuid.uuid)
+  })
 
+}
 }
