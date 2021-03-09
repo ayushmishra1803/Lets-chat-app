@@ -17,7 +17,11 @@ const routes: Routes = [
       path: 'contacts',
       loadChildren: () => import('./contacts/contacts.module').then( m => m.ContactsPageModule)
     }]
+  },  {
+    path: 'chating',
+    loadChildren: () => import('./chating/chating.module').then( m => m.ChatingPageModule)
   },
+
   
 ];
 

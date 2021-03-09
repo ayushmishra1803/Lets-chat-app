@@ -10,7 +10,7 @@ import { ContactsPage } from './contacts.page';
 import { Contacts } from '@ionic-native/contacts/ngx';
 import { ContactService } from 'src/app/Service/contact/contact.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +18,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     IonicModule,
     ContactsPageRoutingModule,AngularFirestoreModule
   ],
-  declarations: [ContactsPage],providers:[Contacts,ContactService]
+  declarations: [ContactsPage],providers:[Contacts,ContactService,SocialSharing]
 })
 export class ContactsPageModule {}
