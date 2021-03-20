@@ -39,7 +39,12 @@
         >
         </ion-input>
         <div slot="end">
-          <span [class]="message==='' ?'unactiveSend':'activeSend'"> Send </span>
+          <span
+            [class]="message==='' ?'unactiveSend':'activeSend'"
+            (click)="sendMessage()"
+          >
+            Send
+          </span>
         </div>
       </ion-item>
     </section>
