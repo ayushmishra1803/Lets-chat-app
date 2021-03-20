@@ -38,3 +38,26 @@ ion-content {
   display: flex;
   align-items: center;
 }
+.mainDiv {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.inputSection {
+  width: 100%;
+  background-color: rgb(41, 38, 38);
+  border-radius: 10px;
+  min-height: 7%;
+}
+ion-item {
+  --background: rgb(41, 38, 38);
+  border-radius: 20px;
+}
+.unactiveSend {
+  color: rgb(131, 46, 105);
+}
+.activeSend {
+  color: rgb(255, 87, 205);
+}

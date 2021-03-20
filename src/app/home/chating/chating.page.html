@@ -20,11 +20,28 @@
               {{chatingUser?.first_name|titlecase}}
             </span>
           </section>
-         
         </section>
       </section>
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <div class="mainDiv">
+    <section class="chatSection"></section>
+    <section class="inputSection">
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Enter Your Message..."
+          color="light"
+          [(ngModel)]="message"
+        >
+        </ion-input>
+        <div slot="end">
+          <span [class]="message==='' ?'unactiveSend':'activeSend'"> Send </span>
+        </div>
+      </ion-item>
+    </section>
+  </div>
+</ion-content>

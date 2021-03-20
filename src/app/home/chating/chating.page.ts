@@ -14,6 +14,7 @@ export class ChatingPage implements OnInit {
   ) {}
   activatedUser;
   chatingUser;
+  message = "";
   ngOnInit() {
     this.activatedRoute.params.subscribe((uuid) => {
       console.log(uuid.uuid);
@@ -21,11 +22,11 @@ export class ChatingPage implements OnInit {
         .getUserByuuid(uuid.uuid)
         .subscribe((result) => {
           console.log();
-          let data={} 
-          data=result.data()
+          let data = {};
+          data = result.data();
           this.chatingUser = {
             id: result.id,
-           ...data,
+            ...data,
           };
           console.log(this.chatingUser);
         });
