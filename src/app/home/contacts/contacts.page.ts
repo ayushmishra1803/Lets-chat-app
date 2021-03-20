@@ -21,7 +21,9 @@ export class ContactsPage implements OnInit {
     private contactService: ContactService,
     private fireStore: AngularFirestore,
     private userData: UserDataService,
-    private loading: LoadingService,private socailSharing:SocialSharing,private router:Router
+    private loading: LoadingService,
+    private socailSharing: SocialSharing,
+    private router: Router
   ) {}
   userContacts: any[] = [];
   dbContactsSubscription: Subscription;
@@ -127,12 +129,14 @@ export class ContactsPage implements OnInit {
       });
     });
   }
-  inviteOthers(){
-    this.socailSharing.share("Sharing The Latest Chat App","Lets Chat",null,"google.com").then(res=>{}).catch(err=>{})
+  inviteOthers() {
+    this.socailSharing
+      .share("Sharing The Latest Chat App", "Lets Chat", null, "google.com")
+      .then((res) => {})
+      .catch((err) => {});
   }
-  GotChat(contact){
+  GotChat(contact) {
     console.log(contact);
-    this.router.navigate(['/chating/'+contact.dbData.id])
-    
+    this.router.navigate(["/chating/" + contact.dbData.id]);
   }
 }
