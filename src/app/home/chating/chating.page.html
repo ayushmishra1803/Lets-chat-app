@@ -4,11 +4,23 @@
       <section class="avtarToolBardiv">
         <section class="backSection">
           <ion-buttons slot="start">
-            <ion-back-button ></ion-back-button>
+            <ion-back-button color="light"></ion-back-button>
           </ion-buttons>
         </section>
         <section class="PicAndname">
-          <span> {{chatingUser?.first_name|titlecase}} </span>
+          <section class="avatarInnerSection">
+            <ion-avatar class="avatarImage">
+              <img
+                [src]="chatingUser?.profileImage?chatingUser?.profileImage:'/assets/chats/user.jfif'"
+              />
+            </ion-avatar>
+          </section>
+          <section class="spanDiv">
+            <span style="color: white; margin-left: 2%">
+              {{chatingUser?.first_name|titlecase}}
+            </span>
+          </section>
+         
         </section>
       </section>
     </div>
