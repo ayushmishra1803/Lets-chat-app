@@ -1,9 +1,18 @@
-.ToolBar {
-  background: rgb(51, 51, 51);
-  width: 100%;
-  color: white;
-}
 ion-content {
   padding: 0px !important;
   margin: 0px !important;
+}
+.mainToolBarDiv {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.avtarToolBardiv {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.backSection{
+  margin: 0 2%;
 }

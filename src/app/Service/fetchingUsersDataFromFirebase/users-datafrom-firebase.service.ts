@@ -7,6 +7,6 @@ export class UsersDatafromFirebaseService {
   constructor(private fireStore: AngularFirestore) {}
 
   getUserByuuid(uuid) {
-   return this.fireStore.collection(`users`).get()
+   return this.fireStore.collection(`users`).doc(uuid).get()
   }
 }
