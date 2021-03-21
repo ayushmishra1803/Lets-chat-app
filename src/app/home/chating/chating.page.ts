@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { ChattingService } from "src/app/Service/chattingService/chatting.service";
 import { UsersDatafromFirebaseService } from "src/app/Service/fetchingUsersDataFromFirebase/users-datafrom-firebase.service";
+import { UserDataService } from "src/app/Service/userData/user-data.service";
 
 @Component({
   selector: "app-chating",
@@ -10,7 +12,8 @@ import { UsersDatafromFirebaseService } from "src/app/Service/fetchingUsersDataF
 export class ChatingPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
-    private gettinguserDataService: UsersDatafromFirebaseService
+    private gettinguserDataService: UsersDatafromFirebaseService,
+    private chatting: ChattingService,private userData:UserDataService
   ) {}
   activatedUser;
   chatingUser;
@@ -33,6 +36,13 @@ export class ChatingPage implements OnInit {
     });
   }
   sendMessage() {
-    
+    if (this.message != "") {
+      const data ={
+        sender:this.userData.getUserData().id,
+        message:this.message,
+        Data:new Date()
+      }
+      this.chatting.addtochats(this.chatingUser,this.userData.getUserData(),data);
+    }
   }
 }
