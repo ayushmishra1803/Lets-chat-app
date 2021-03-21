@@ -48,7 +48,7 @@ export class ChattingService {
       .get();
   }
   fetchChats(chatsCollectionUUid) {
-    return this.angularfire.collection(chatsCollectionUUid).valueChanges();
+    return this.angularfire.collection(chatsCollectionUUid,ref=>ref.orderBy('Date','asc')).valueChanges();
   }
   addMessgaesIfChatExist(chatId,data) {
     return this.angularfire.collection(chatId).add(data)

@@ -28,13 +28,14 @@
 
 <ion-content>
   <div class="mainDiv">
-    <section class="chatSection" >
-      <section  *ngFor="let chat of chats">
-        <section class="textFromActiveUser" *ngIf="chat.sender === activateUser.id">
+    <section class="chatSection">
+      <section *ngFor="let chat of chats">
+        <section
+          class="textFromActiveUser"
+          *ngIf="chat.sender === activateUser.id"
+        >
           <section class="textFromActiveUserMessage">
-            <span class="message">
-              {{chat.message}}
-            </span>
+            <span class="message"> {{chat.message}} </span>
           </section>
           <section class="avatarActiveChattingSection">
             <ion-avatar class="avatarImage">
@@ -43,14 +44,11 @@
               />
             </ion-avatar>
           </section>
-         
         </section>
-        <section class="textFromOtherUser" *ngIf="chat.sender != activateUser.id">
-          <section class="textFromOtherUserMessage">
-            <span class="message">
-              {{chat.message}}
-            </span>
-          </section>
+        <section
+          class="textFromOtherUser"
+          *ngIf="chat.sender != activateUser.id"
+        >
           <section class="avatarOtherChattingSection">
             <ion-avatar class="avatarImage">
               <img
@@ -58,7 +56,9 @@
               />
             </ion-avatar>
           </section>
-         
+          <section class="textFromOtherUserMessage">
+            <span class="message"> {{chat.message}} </span>
+          </section>
         </section>
       </section>
     </section>

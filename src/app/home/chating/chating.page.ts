@@ -73,7 +73,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
         const data = {
           sender: this.userData.getUserData().id,
           message: this.message,
-          Data: new Date(),
+          Date: new Date(),
         };
         this.chatting.FirstTymChat(
           this.chatingUser,
@@ -84,7 +84,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
         const data = {
           sender: this.userData.getUserData().id,
           message: this.message,
-          Data: new Date(),
+          Date: new Date(),
         };
         this.chatting.addMessgaesIfChatExist(this.chattingCollection, data);
       }
