@@ -65,6 +65,8 @@ export class ChatingPage implements OnInit, AfterContentInit {
     });
   }
   sendMessage() {
+    console.log(this.chats);
+    
     if (this.message != "") {
       if (this.chats == []) {
         const data = {
