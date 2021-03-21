@@ -32,7 +32,7 @@ export class ChatingPage implements OnInit {
         });
     });
   }
-  sendMessage(){
+  sendMessage() {
     
   }
 }
