@@ -24,12 +24,13 @@ export class ChatingPage implements OnInit, AfterContentInit {
       });
     }
   }
-  activatedUser;
+  activateUser;
   chatingUser;
   message = "";
   chattingCollection = "";
   chats = [];
   ngOnInit() {
+    this.activateUser=this.userData.getUserData();
     this.activatedRoute.params.subscribe((uuid) => {
       console.log(uuid.uuid);
       this.gettinguserDataService
@@ -56,7 +57,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
                 this.chatting
                   .fetchChats(this.chattingCollection)
                   .subscribe((chats) => {
-                    this.chats = chats?chats:[];
+                    this.chats = chats ? chats : [];
                     console.log(this.chats);
                   });
               });
@@ -66,7 +67,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
   }
   sendMessage() {
     console.log(this.chats);
-    
+
     if (this.message != "") {
       if (this.chats.length <= 0) {
         const data = {
