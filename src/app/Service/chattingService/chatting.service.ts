@@ -10,21 +10,22 @@ export class ChattingService {
     private angularfire: AngularFirestore,
     private userData: UserDataService
   ) {}
-  addtochats(...agrs) {
+  FirstTymChat(...agrs) {
+    const collectionName = Math.random().toString();
     const chatData = {
       ...agrs[2],
     };
     this.angularfire
-      .collection("chats")
+      .collection(collectionName)
       .add(chatData)
       .then((charAdded) => {
         const dataFor0 = {
-          id: agrs[1].id,
-          firebaseChatId: charAdded.id,
+          chattingUserId: agrs[1].id,
+          firebaseChatId: collectionName,
         };
         const dataFor1 = {
-          id: agrs[1].id,
-          firebaseChatId: charAdded.id,
+          chattingUserId: agrs[0].id,
+          firebaseChatId: collectionName,
         };
         this.angularfire
           .collection(`users/${agrs[0].id}/chats`)
@@ -37,7 +38,19 @@ export class ChattingService {
           });
       });
   }
-  addMessgaesIfChatExist(chatId) {
- 
+  searchIfChatExist(chattingUserID, activeuserId) {
+    return this.angularfire
+      .collection(`users`)
+      .doc(`${activeuserId}`)
+      .collection("chats", (ref) =>
+        ref.where("chattingUserId", "==", chattingUserID)
+      )
+      .get();
+  }
+  fetchChats(chatsCollectionUUid) {
+    return this.angularfire.collection(chatsCollectionUUid).valueChanges();
+  }
+  addMessgaesIfChatExist(chatId,data) {
+    return this.angularfire.collection(chatId).add(data)
   }
 }
