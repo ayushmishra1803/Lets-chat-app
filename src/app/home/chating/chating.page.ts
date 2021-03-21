@@ -80,6 +80,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
           this.userData.getUserData(),
           data
         );
+        this.message= ''
       } else {
         const data = {
           sender: this.userData.getUserData().id,
@@ -87,6 +88,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
           Date: new Date(),
         };
         this.chatting.addMessgaesIfChatExist(this.chattingCollection, data);
+        this.message= ''
       }
     }
   }
