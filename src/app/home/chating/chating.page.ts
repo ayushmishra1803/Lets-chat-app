@@ -30,7 +30,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
   chattingCollection = "";
   chats = [];
   ngOnInit() {
-    this.activateUser=this.userData.getUserData();
+    this.activateUser = this.userData.getUserData();
     this.activatedRoute.params.subscribe((uuid) => {
       console.log(uuid.uuid);
       this.gettinguserDataService
@@ -69,7 +69,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
     console.log(this.chats);
 
     if (this.message != "") {
-      if (this.chats.length <= 0) {
+      if (this.chats.length == 0) {
         const data = {
           sender: this.userData.getUserData().id,
           message: this.message,

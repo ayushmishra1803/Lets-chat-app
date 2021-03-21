@@ -65,7 +65,8 @@ ion-item {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 90%;
+  height: 80%;
+  overflow-y: scroll;
 }
 .textFromActiveUser{
   display: flex;
