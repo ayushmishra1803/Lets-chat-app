@@ -56,7 +56,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
                 this.chatting
                   .fetchChats(this.chattingCollection)
                   .subscribe((chats) => {
-                    this.chats = chats;
+                    this.chats = chats?chats:[];
                     console.log(this.chats);
                   });
               });
