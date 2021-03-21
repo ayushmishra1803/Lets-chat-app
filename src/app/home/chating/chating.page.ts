@@ -68,7 +68,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
     console.log(this.chats);
     
     if (this.message != "") {
-      if (this.chats == []) {
+      if (this.chats.length <= 0) {
         const data = {
           sender: this.userData.getUserData().id,
           message: this.message,
