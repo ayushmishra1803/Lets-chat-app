@@ -1,5 +1,6 @@
-import { AfterContentInit, Component, OnInit } from "@angular/core";
+import { AfterContentInit, Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { HomeChatsService } from "src/app/Service/HomeChatService/home-chats.service";
 import { LoadingService } from "src/app/Service/loading/loading.service";
 import { UserDataService } from "src/app/Service/userData/user-data.service";
@@ -9,52 +10,68 @@ import { UserDataService } from "src/app/Service/userData/user-data.service";
   templateUrl: "./chats.page.html",
   styleUrls: ["./chats.page.scss"],
 })
-export class ChatsPage implements OnInit,AfterContentInit {
+export class ChatsPage implements OnInit, AfterContentInit {
   constructor(
     private homeChattingService: HomeChatsService,
     private loading: LoadingService,
-    private userData: UserDataService,private router:Router
+    private userData: UserDataService,
+    private router: Router
   ) {}
+
   ngAfterContentInit(): void {
-    this.activeUser=this.userData.getUserData();
+    console.log("AfterContentInit");
+
+    this.userchat = [];
+    this.activeUser = this.userData.getUserData();
     const userid = this.userData.getUserData().id;
     this.loading.showLoader();
+
     this.homeChattingService.getActiveUserChats(userid).subscribe((data) => {
-      if (data) {
+      console.log(data);
+
+      if (data.length > 0) {
         this.fetchChats(data);
+        this.loading.hideLoader();
       } else {
         this.loading.hideLoader();
       }
     });
   }
+
   userchat = [];
   activeUser;
-  ngOnInit() {
-  
-  }
+  chatsSubscription = new Subscription();
+  ngOnInit() {}
   fetchChats(userChatData: any[]) {
     this.userchat = [];
-    userChatData.forEach((userSpecificChatId) => {
-      this.homeChattingService
-        .fetchUserChats(
-          userSpecificChatId.chattingUserId,
-          userSpecificChatId.firebaseChatId
-        )
-        .subscribe((data) => {
-          console.log(data.length);
+    console.log(this.userchat);
 
-          console.log(data);
-          this.userchat.push({
-            userData: data[1],
-            chatData: data[0],userId:userSpecificChatId.chattingUserId
-          });
-          console.log(this.userchat);
+    userChatData.map((userSpecificChatId, index) => {
+      if (index === 0) {
+        console.log("Hello");
+        this.userchat = [];
+        console.log(this.userchat);
+      }
+      this.chatsSubscription.add(
+        this.homeChattingService
+          .fetchUserChats(
+            userSpecificChatId.chattingUserId,
+            userSpecificChatId.firebaseChatId
+          )
+          .subscribe((data) => {
+            console.log(data);
 
-          this.loading.hideLoader();
-        });
+            this.userchat.push({
+              userData: data[1],
+              chatData: data[0],
+              userId: userSpecificChatId.chattingUserId,
+            });
+          })
+      );
     });
   }
-  goToChats(uuid){
-    this.router.navigate(["/chating/" +uuid]);
+  goToChats(uuid) {
+    this.chatsSubscription.unsubscribe();
+    this.router.navigate(["/chating/" + uuid]);
   }
 }
