@@ -74,4 +74,7 @@ export class ChatsPage implements OnInit, AfterContentInit {
     this.chatsSubscription.unsubscribe();
     this.router.navigate(["/chating/" + uuid]);
   }
+  goToContacts() {
+    this.router.navigate(["/home/contacts"]);
+  }
 }
