@@ -26,7 +26,7 @@
     ></ion-searchbar>
   </section>
   <div class="list" *ngFor="let user of userchat">
-    <div class="listiteams">
+    <div class="listiteams" (click)="goToChats(user.userId)">
       <section style="display: flex; width: 70%; height: 100%">
         <section>
           <ion-avatar style="height: 55px; width: 55px">
@@ -53,7 +53,8 @@
           </section>
           <section>
             <span class="usermessage"
-              >{{user?.chatData[user.chatData.length-1]?.sender===activeUser.id?'You':''}}: {{user.chatData[user.chatData.length-1].message}}</span
+              >{{user?.chatData[user.chatData.length-1]?.sender===activeUser.id?'You':''}}:
+              {{user.chatData[user.chatData.length-1].message}}</span
             >
           </section>
         </section>

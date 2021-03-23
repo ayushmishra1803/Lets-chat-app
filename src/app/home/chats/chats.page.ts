@@ -1,4 +1,5 @@
 import { AfterContentInit, Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { HomeChatsService } from "src/app/Service/HomeChatService/home-chats.service";
 import { LoadingService } from "src/app/Service/loading/loading.service";
 import { UserDataService } from "src/app/Service/userData/user-data.service";
@@ -12,7 +13,7 @@ export class ChatsPage implements OnInit,AfterContentInit {
   constructor(
     private homeChattingService: HomeChatsService,
     private loading: LoadingService,
-    private userData: UserDataService
+    private userData: UserDataService,private router:Router
   ) {}
   ngAfterContentInit(): void {
     this.activeUser=this.userData.getUserData();
@@ -45,12 +46,15 @@ export class ChatsPage implements OnInit,AfterContentInit {
           console.log(data);
           this.userchat.push({
             userData: data[1],
-            chatData: data[0],
+            chatData: data[0],userId:userSpecificChatId.chattingUserId
           });
           console.log(this.userchat);
 
           this.loading.hideLoader();
         });
     });
+  }
+  goToChats(uuid){
+    this.router.navigate(["/chating/" +uuid]);
   }
 }
