@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { combineLatest } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -11,9 +12,14 @@ export class HomeChatsService {
       .collection("users")
       .doc(activeuserUuid)
       .collection("chats")
-      .get();
+      .valueChanges();
   }
-  fetchUserChats(...args) {
-    console.log(args);
+  fetchUserChats(chattinuser, firebaseChatID) {
+  return   combineLatest(
+      this.angularfire
+        .collection(firebaseChatID, (ref) => ref.orderBy("Date", "asc"))
+        .valueChanges(),
+      this.angularfire.collection("users").doc(chattinuser).valueChanges()
+    );
   }
 }
