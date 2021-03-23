@@ -8,12 +8,14 @@ import { ChatingPageRoutingModule } from './chating-routing.module';
 
 import { ChatingPage } from './chating.page';
 
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChatingPageRoutingModule
+    ChatingPageRoutingModule,AngularFireMessagingModule
   ],
   declarations: [ChatingPage]
 })

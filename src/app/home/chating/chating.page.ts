@@ -1,4 +1,5 @@
 import { AfterContentInit, Component, OnInit } from "@angular/core";
+import { AngularFireMessaging } from "@angular/fire/messaging";
 import { ActivatedRoute } from "@angular/router";
 import { ChattingService } from "src/app/Service/chattingService/chatting.service";
 import { UsersDatafromFirebaseService } from "src/app/Service/fetchingUsersDataFromFirebase/users-datafrom-firebase.service";
@@ -14,7 +15,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
     private activatedRoute: ActivatedRoute,
     private gettinguserDataService: UsersDatafromFirebaseService,
     private chatting: ChattingService,
-    private userData: UserDataService
+    private userData: UserDataService,private notification:AngularFireMessaging
   ) {}
   ngAfterContentInit(): void {
     if (this.chattingCollection != "") {
