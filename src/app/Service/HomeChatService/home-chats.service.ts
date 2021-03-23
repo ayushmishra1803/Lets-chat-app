@@ -6,5 +6,14 @@ import { AngularFirestore } from "@angular/fire/firestore";
 })
 export class HomeChatsService {
   constructor(private angularfire: AngularFirestore) {}
-  getActiveUserChats() {}
+  getActiveUserChats(activeuserUuid) {
+    return this.angularfire
+      .collection("users")
+      .doc(activeuserUuid)
+      .collection("chats")
+      .get();
+  }
+  fetchUserChats(...args) {
+    console.log(args);
+  }
 }
