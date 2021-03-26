@@ -17,6 +17,7 @@ export class ChatsPage implements OnInit, AfterContentInit {
     private userData: UserDataService,
     private router: Router
   ) {}
+  usersChatSubscription = new Subscription();
 
   ngAfterContentInit(): void {
     console.log("AfterContentInit");
@@ -26,16 +27,18 @@ export class ChatsPage implements OnInit, AfterContentInit {
     const userid = this.userData.getUserData().id;
     this.loading.showLoader();
 
-    this.homeChattingService.getActiveUserChats(userid).subscribe((data) => {
-      console.log(data);
+    this.usersChatSubscription.add(
+      this.homeChattingService.getActiveUserChats(userid).subscribe((data) => {
+        console.log(data);
 
-      if (data.length > 0) {
-        this.fetchChats(data);
-        this.loading.hideLoader();
-      } else {
-        this.loading.hideLoader();
-      }
-    });
+        if (data.length > 0) {
+          this.fetchChats(data);
+          this.loading.hideLoader();
+        } else {
+          this.loading.hideLoader();
+        }
+      })
+    );
   }
 
   userchat = [];
@@ -48,7 +51,6 @@ export class ChatsPage implements OnInit, AfterContentInit {
 
     userChatData.map((userSpecificChatId, index) => {
       if (index === 0) {
-        console.log("Hello");
         this.userchat = [];
         console.log(this.userchat);
       }
@@ -71,6 +73,7 @@ export class ChatsPage implements OnInit, AfterContentInit {
     });
   }
   goToChats(uuid) {
+    this.usersChatSubscription.unsubscribe();
     this.chatsSubscription.unsubscribe();
     this.router.navigate(["/chating/" + uuid]);
   }
