@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Contacts } from "@ionic-native/contacts/ngx";
 import { LoadingController } from "@ionic/angular";
@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
   templateUrl: "./contacts.page.html",
   styleUrls: ["./contacts.page.scss"],
 })
-export class ContactsPage implements OnInit {
+export class ContactsPage implements OnInit,OnDestroy {
   constructor(
     private contact: Contacts,
     private contactService: ContactService,
@@ -25,6 +25,9 @@ export class ContactsPage implements OnInit {
     private socailSharing: SocialSharing,
     private router: Router
   ) {}
+  ngOnDestroy(): void {
+    throw new Error("Method not implemented.");
+  }
   userContacts: any[] = [];
   dbContactsSubscription: Subscription;
   dbContactlistUser: any[] = [];
