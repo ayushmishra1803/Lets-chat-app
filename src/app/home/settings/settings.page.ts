@@ -19,6 +19,8 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
     this.activeUserData = this.userData.getUserData();
   }
+
+  
   logOut() {
     this.userData.setuserData(null);
     this.userData.setLoginStatus(false);
