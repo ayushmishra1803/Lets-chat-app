@@ -20,6 +20,8 @@ export class SettingsPage implements OnInit {
     this.activeUserData = this.userData.getUserData();
   }
 
+
+  
   logOut() {
     this.userData.setuserData(null);
     this.userData.setLoginStatus(false);
