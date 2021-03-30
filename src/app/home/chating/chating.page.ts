@@ -1,4 +1,11 @@
-import { AfterContentInit, Component, OnInit } from "@angular/core";
+import {
+  AfterContentInit,
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { AngularFireMessaging } from "@angular/fire/messaging";
 import { ActivatedRoute } from "@angular/router";
 import { ChattingService } from "src/app/Service/chattingService/chatting.service";
@@ -10,13 +17,20 @@ import { UserDataService } from "src/app/Service/userData/user-data.service";
   templateUrl: "./chating.page.html",
   styleUrls: ["./chating.page.scss"],
 })
-export class ChatingPage implements OnInit, AfterContentInit {
+export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
   constructor(
     private activatedRoute: ActivatedRoute,
     private gettinguserDataService: UsersDatafromFirebaseService,
     private chatting: ChattingService,
-    private userData: UserDataService,private notification:AngularFireMessaging
+    private userData: UserDataService,
+    private notification: AngularFireMessaging
   ) {}
+  ngAfterViewChecked(): void {
+    try {
+      this.chatSection.nativeElement.scrollTop = this.chatSection.nativeElement.scrollHeight;
+    } catch (err) {}
+  }
+  @ViewChild("chatSection") chatSection: ElementRef;
   ngAfterContentInit(): void {
     if (this.chattingCollection != "") {
       this.chatting.fetchChats(this.chattingCollection).subscribe((chats) => {
@@ -59,7 +73,9 @@ export class ChatingPage implements OnInit, AfterContentInit {
                   .fetchChats(this.chattingCollection)
                   .subscribe((chats) => {
                     this.chats = chats ? chats : [];
-                    console.log(this.chats);
+                    try {
+                      this.chatSection.nativeElement.scrollTop = this.chatSection.nativeElement.scrollHeight;
+                    } catch (err) {}
                   });
               });
             });
@@ -81,7 +97,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
           this.userData.getUserData(),
           data
         );
-        this.message= ''
+        this.message = "";
       } else {
         const data = {
           sender: this.userData.getUserData().id,
@@ -89,7 +105,7 @@ export class ChatingPage implements OnInit, AfterContentInit {
           Date: new Date(),
         };
         this.chatting.addMessgaesIfChatExist(this.chattingCollection, data);
-        this.message= ''
+        this.message = "";
       }
     }
   }
