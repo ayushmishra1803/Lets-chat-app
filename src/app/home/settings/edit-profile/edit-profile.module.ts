@@ -8,6 +8,7 @@ import { EditProfilePageRoutingModule } from "./edit-profile-routing.module";
 
 import { EditProfilePage } from "./edit-profile.page";
 import { HeadingDirective } from "src/app/Directives/heading/heading.directive";
+import { EditProfileCardComponent } from "src/app/components/edit-profile-card/edit-profile-card.component";
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { HeadingDirective } from "src/app/Directives/heading/heading.directive";
     IonicModule,
     EditProfilePageRoutingModule,
   ],
-  declarations: [EditProfilePage, HeadingDirective],
+  declarations: [EditProfilePage, HeadingDirective, EditProfileCardComponent],
 })
 export class EditProfilePageModule {}

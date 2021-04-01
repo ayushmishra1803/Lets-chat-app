@@ -11,6 +11,6 @@
     </section>
   </div>
   <div class="edit-item-div">
-
+    <app-edit-profile-card *ngFor="let config of editable" [cardConfig]='config' (onChangeInput)="onChangeInputValue($event)"></app-edit-profile-card>
   </div>
 </ion-content>

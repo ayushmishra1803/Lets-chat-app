@@ -1,0 +1,20 @@
+.mainDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+}
+.card {
+  color: white;
+  width: 80%;
+  background-color: rgb(46, 45, 45);
+}
+.card-heading {
+  width: 100%;
+  justify-content: flex-start;
+  margin-left: 5%;
+}
+ion-item{
+    --background: rgb(46, 45, 45);;
+    color: white;
+    width: 100%;
+}
