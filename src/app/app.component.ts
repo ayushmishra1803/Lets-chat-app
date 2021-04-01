@@ -29,8 +29,8 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-     this.checkLoginStatus();
-     /*
+      this.checkLoginStatus();
+      /*
      use this for loging  out user currently
      
      //this.Storage.set('userData',null) 
@@ -50,6 +50,8 @@ export class AppComponent {
         } else {
           this.userData.setLoginStatus(true);
           this.userData.setuserData(result);
+          console.log(result);
+
           this.router.navigate(["/home/chats"], { replaceUrl: true });
         }
       })

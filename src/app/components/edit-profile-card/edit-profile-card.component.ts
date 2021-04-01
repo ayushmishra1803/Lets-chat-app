@@ -10,7 +10,7 @@ export class EditProfileCardComponent implements OnInit {
     title: string;
     value: string;
     placeholder: string;
-    type: string;
+    type: string | number;
   };
   @Output() onChangeInput = new EventEmitter<string>();
   constructor() {}
