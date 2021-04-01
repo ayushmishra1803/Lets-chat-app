@@ -25,4 +25,7 @@ export class SettingsPage implements OnInit {
     this.userData.setLoginStatus(false);
     this.router.navigate(["/login"], { replaceUrl: true });
   }
+  navigate(path:string){
+this.router.navigate([path])
+  }
 }
