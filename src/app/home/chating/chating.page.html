@@ -69,6 +69,7 @@
           placeholder="Enter Your Message..."
           color="light"
           [(ngModel)]="message"
+          (keyup.enter)="sendMessage()"
         >
         </ion-input>
         <div slot="end">
