@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { UserDataService } from "../userData/user-data.service";
-
+import { map } from "rxjs/operators";
 @Injectable({
   providedIn: "root",
 })
@@ -48,9 +48,20 @@ export class ChattingService {
       .get();
   }
   fetchChats(chatsCollectionUUid) {
-    return this.angularfire.collection(chatsCollectionUUid,ref=>ref.orderBy('Date','asc')).valueChanges();
+    return this.angularfire
+      .collection(chatsCollectionUUid, (ref) => ref.orderBy("Date", "asc"))
+      .snapshotChanges()
+      .pipe(
+        map((action) =>
+          action.map((a) => {
+            const data = a.payload.doc.data() as any[];
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
   }
-  addMessgaesIfChatExist(chatId,data) {
-    return this.angularfire.collection(chatId).add(data)
+  addMessgaesIfChatExist(chatId, data) {
+    return this.angularfire.collection(chatId).add(data);
   }
 }

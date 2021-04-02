@@ -8,6 +8,8 @@ import {
 } from "@angular/core";
 import { AngularFireMessaging } from "@angular/fire/messaging";
 import { ActivatedRoute } from "@angular/router";
+import { ModalController } from "@ionic/angular";
+import { ChattingLongHoldMenuComponent } from "src/app/components/chatting-long-hold-menu/chatting-long-hold-menu.component";
 import { ChattingService } from "src/app/Service/chattingService/chatting.service";
 import { UsersDatafromFirebaseService } from "src/app/Service/fetchingUsersDataFromFirebase/users-datafrom-firebase.service";
 import { UserDataService } from "src/app/Service/userData/user-data.service";
@@ -23,7 +25,8 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     private gettinguserDataService: UsersDatafromFirebaseService,
     private chatting: ChattingService,
     private userData: UserDataService,
-    private notification: AngularFireMessaging
+    private notification: AngularFireMessaging,
+    private modalController: ModalController
   ) {}
   ngAfterViewChecked(): void {
     try {
@@ -43,7 +46,7 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
   chatingUser;
   message = "";
   chattingCollection = "";
-  chats = [];
+  chats: any = [];
   ngOnInit() {
     this.activateUser = this.userData.getUserData();
     this.activatedRoute.params.subscribe((uuid) => {
@@ -73,6 +76,7 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
                   .fetchChats(this.chattingCollection)
                   .subscribe((chats) => {
                     this.chats = chats ? chats : [];
+
                     try {
                       this.chatSection.nativeElement.scrollTop = this.chatSection.nativeElement.scrollHeight;
                     } catch (err) {}
@@ -108,5 +112,16 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
         this.message = "";
       }
     }
+  }
+  onLongHold() {
+    this.modalController
+      .create({
+        component: ChattingLongHoldMenuComponent,
+        backdropDismiss: true,
+      })
+      .then((present) => {
+        present.present();
+      })
+      .catch((err) => {});
   }
 }

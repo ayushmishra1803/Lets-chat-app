@@ -14,9 +14,8 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { LoadingComponent } from "./components/loading/loading.component";
 import { IonicStorageModule } from '@ionic/storage';
-import { HeadingDirective } from './Directives/heading/heading.directive';
 @NgModule({
-  declarations: [AppComponent,LoadingComponent],
+  declarations: [AppComponent,LoadingComponent, ],
   entryComponents: [],
   imports: [
     BrowserModule,

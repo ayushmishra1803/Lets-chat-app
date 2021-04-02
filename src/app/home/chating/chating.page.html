@@ -32,7 +32,7 @@
       <section *ngFor="let chat of chats">
         <section
           class="textFromActiveUser"
-          *ngIf="chat.sender === activateUser.id"
+          *ngIf="chat.sender === activateUser.id" appLongPress (longPress)="onLongHold()"
         >
           <section class="textFromActiveUserMessage">
             <span class="message"> {{chat.message}} </span>

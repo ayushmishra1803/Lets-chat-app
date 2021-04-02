@@ -9,6 +9,8 @@ import { ChatingPageRoutingModule } from './chating-routing.module';
 import { ChatingPage } from './chating.page';
 
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { LongPressDirective } from 'src/app/Directives/longPressDirective/long-press.directive';
+import { ChattingLongHoldMenuComponent } from 'src/app/components/chatting-long-hold-menu/chatting-long-hold-menu.component';
 
 @NgModule({
   imports: [
@@ -17,6 +19,6 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
     IonicModule,
     ChatingPageRoutingModule,AngularFireMessagingModule
   ],
-  declarations: [ChatingPage]
+  declarations: [ChatingPage,LongPressDirective,ChattingLongHoldMenuComponent]
 })
 export class ChatingPageModule {}
