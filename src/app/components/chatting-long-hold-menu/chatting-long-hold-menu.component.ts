@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ModalController } from "@ionic/angular";
 
 @Component({
   selector: "app-chatting-long-hold-menu",
@@ -6,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./chatting-long-hold-menu.component.scss"],
 })
 export class ChattingLongHoldMenuComponent implements OnInit {
-  constructor() {}
+  constructor(private modal:ModalController) {}
   option = [
     {
       name: "Delete",
@@ -22,4 +23,7 @@ export class ChattingLongHoldMenuComponent implements OnInit {
     },
   ];
   ngOnInit() {}
+  onDissmissModel(option){
+this.modal.dismiss({data:option})
+  }
 }

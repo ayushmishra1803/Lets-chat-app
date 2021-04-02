@@ -64,4 +64,12 @@ export class ChattingService {
   addMessgaesIfChatExist(chatId, data) {
     return this.angularfire.collection(chatId).add(data);
   }
+  deleteMessage(chattingCollection,docId) {
+    console.log(chattingCollection);
+    
+    return this.angularfire.collection(chattingCollection).doc(docId).delete();
+  }
+  editMessage(chatCollectionId,selectedMessageId,data){
+    return this.angularfire.collection(chatCollectionId).doc(selectedMessageId).update(data)
+  }
 }

@@ -28,6 +28,9 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     private notification: AngularFireMessaging,
     private modalController: ModalController
   ) {}
+  @ViewChild("chatInput") chatInput: ElementRef;
+  EditMode: boolean = false;
+  chatToBeEdited: any = {};
   ngAfterViewChecked(): void {
     try {
       this.chatSection.nativeElement.scrollTop = this.chatSection.nativeElement.scrollHeight;
@@ -113,15 +116,53 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
       }
     }
   }
-  onLongHold() {
+  onLongHold(selectedChat) {
     this.modalController
       .create({
         component: ChattingLongHoldMenuComponent,
         backdropDismiss: true,
+        cssClass: ["chat-menu-modal modal-wrapper"],
       })
       .then((present) => {
         present.present();
+        present.onDidDismiss().then((onDissmiss) => {
+          console.log(onDissmiss);
+          if (onDissmiss.data.data === "Delete") {
+            this.deletemessage(selectedChat);
+          } else if (onDissmiss.data.data === "Edit") {
+            this.editMode(selectedChat);
+          }
+        });
       })
       .catch((err) => {});
+  }
+  deletemessage(selectedChatData) {
+    console.log(selectedChatData);
+
+    this.chatting
+      .deleteMessage(this.chattingCollection, selectedChatData.id)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {});
+  }
+  editMode(selectedChatData) {
+    this.chatToBeEdited = selectedChatData;
+    this.EditMode = true;
+    this.message = selectedChatData.message;
+  }
+  editmessage() {
+    this.EditMode = false;
+    const data = {
+      message: this.message,
+      edited: true,
+    };
+    this.chatting.editMessage(
+      this.chattingCollection,
+      this.chatToBeEdited.id,
+      data
+    );
+    this.chatToBeEdited = {};
+    this.message = "";
   }
 }

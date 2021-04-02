@@ -1,8 +1,16 @@
 <div class="main-div">
-  <ion-item *ngFor="let option of option">
+  <ion-item
+    *ngFor="let option of option"
+    (click)="onDissmissModel(option.name)"
+  >
     <ion-label>
       {{ option.name }}
-      <ion-icon [name]="option.icon" [color]="option.color"> </ion-icon>
+      <ion-icon
+        [name]="option.icon"
+        [color]="option.color"
+        style="padding-left: 2%"
+      >
+      </ion-icon>
     </ion-label>
   </ion-item>
 </div>

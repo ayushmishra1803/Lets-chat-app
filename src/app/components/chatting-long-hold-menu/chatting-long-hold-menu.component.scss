@@ -3,9 +3,13 @@
   height: 100%;
   background-color: rgb(37, 36, 36);
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 ion-item {
   --background: rgb(37, 36, 36) !important;
   color: white;
-  font-size: 18px;
+  font-size: 20px;
+  padding: 3%;
 }
