@@ -28,7 +28,7 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     private notification: AngularFireMessaging,
     private modalController: ModalController
   ) {}
-  @ViewChild("chatInput") chatInput: ElementRef;
+  @ViewChild("chatInputONDOM", { static: false }) chatInput: ElementRef;
   EditMode: boolean = false;
   chatToBeEdited: any = {};
   ngAfterViewChecked(): void {
