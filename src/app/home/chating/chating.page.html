@@ -32,7 +32,9 @@
       <section *ngFor="let chat of chats">
         <section
           class="textFromActiveUser"
-          *ngIf="chat.sender === activateUser.id" appLongPress (longPress)="onLongHold(chat)"
+          *ngIf="chat.sender === activateUser.id"
+          appLongPress
+          (longPress)="onLongHold(chat)"
         >
           <section class="textFromActiveUserMessage">
             <span class="message"> {{chat.message}} </span>
@@ -69,7 +71,8 @@
           placeholder="Enter Your Message..."
           color="light"
           [(ngModel)]="message"
-          (keyup.enter)="sendMessage()" #chatInputONDOM
+          (keyup.enter)="sendMessage()"
+          #chatInputONDOM
         >
         </ion-input>
         <div slot="end">
