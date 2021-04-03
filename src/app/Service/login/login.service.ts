@@ -59,6 +59,14 @@ export class LoginService {
               this.loader.hideLoader();
             }
           );
+      })
+      .catch((err) => {
+        this.toast.bringToastController(
+          "Username or Password incorrect try again",
+          3000,
+          "danger"
+        );
+        this.loader.hideLoader();
       });
   }
   userSiginUp(data) {

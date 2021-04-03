@@ -32,12 +32,14 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
   EditMode: boolean = false;
   chatToBeEdited: any = {};
   ngAfterViewChecked(): void {
+  
     try {
       this.chatSection.nativeElement.scrollTop = this.chatSection.nativeElement.scrollHeight;
     } catch (err) {}
   }
   @ViewChild("chatSection") chatSection: ElementRef;
   ngAfterContentInit(): void {
+
     if (this.chattingCollection != "") {
       this.chatting.fetchChats(this.chattingCollection).subscribe((chats) => {
         this.chats = chats;
@@ -88,6 +90,10 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
             });
         });
     });
+    this.chatting.newChatCollectionName.subscribe(res=>{
+      console.log(res);
+      
+    })
   }
   sendMessage() {
     console.log(this.chats);

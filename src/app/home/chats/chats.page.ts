@@ -20,8 +20,6 @@ export class ChatsPage implements OnInit, AfterContentInit {
   usersChatSubscription = new Subscription();
 
   ngAfterContentInit(): void {
-    console.log("AfterContentInit");
-
     this.userchat = [];
     this.activeUser = this.userData.getUserData();
     const userid = this.userData.getUserData().id;
@@ -30,7 +28,7 @@ export class ChatsPage implements OnInit, AfterContentInit {
     this.usersChatSubscription.add(
       this.homeChattingService.getActiveUserChats(userid).subscribe((data) => {
         console.log(data);
-
+        this.loading.hideLoader();
         if (data.length > 0) {
           this.fetchChats(data);
           this.loading.hideLoader();

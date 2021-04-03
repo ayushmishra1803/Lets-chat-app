@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { UserDataService } from "../userData/user-data.service";
 import { map } from "rxjs/operators";
+import { Subject } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
@@ -10,8 +11,10 @@ export class ChattingService {
     private angularfire: AngularFirestore,
     private userData: UserDataService
   ) {}
+  newChatCollectionName=new Subject<any>()
   FirstTymChat(...agrs) {
     const collectionName = Math.random().toString();
+    this.newChatCollectionName.next(collectionName)
     const chatData = {
       ...agrs[2],
     };
