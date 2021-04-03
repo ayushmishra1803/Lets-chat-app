@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { EditUserDataService } from "src/app/Service/Edit-User-Data/edit-user-data.service";
 import { UserDataService } from "src/app/Service/userData/user-data.service";
 
 @Component({
@@ -13,19 +14,22 @@ export class EditProfilePage implements OnInit {
       title: "First Name",
       placeholder: "Jhon",
       value: "",
-      type: "text",nameInDb:'first_name'
+      type: "text",
+      nameInDb: "first_name",
     },
     {
       title: "Last Name",
       placeholder: "Doe",
       value: "",
-      type: "text",nameInDb:'last_name'
+      type: "text",
+      nameInDb: "last_name",
     },
     {
       title: "Your Email",
       placeholder: "JhonDoe@unknown.com",
       value: "",
-      type: "text",nameInDb:'email'
+      type: "text",
+      nameInDb: "email",
     },
     // {
     //   title: "Your @Username",
@@ -37,10 +41,15 @@ export class EditProfilePage implements OnInit {
       title: "Your Mobile Number",
       placeholder: "+91 **********",
       value: "",
-      type: "tel",nameInDb:'mobileNumber'
+      type: "tel",
+      nameInDb: "mobileNumber",
     },
   ];
-  constructor(private userData: UserDataService, private nav: NavController) {}
+  constructor(
+    private userData: UserDataService,
+    private nav: NavController,
+    private editProfileService: EditUserDataService
+  ) {}
 
   ngOnInit() {
     this.editable[0].value = this.userData.getUserData().first_name;
@@ -55,15 +64,19 @@ export class EditProfilePage implements OnInit {
   }
   /*
   this event is fired when any of the value changes and you hover out  from input in in input 
-  */ 
-  onChangeInputValue(event, index) {
+  */
+  onChangeInputValue(event, index,) {
     console.log(event);
-    this.editable[index].value=event
-    const data={
-      [this.editable[index].nameInDb]:this.editable[index].value
-    }
+    this.editable[index].value = event;
+    const data = {
+      [this.editable[index].nameInDb]: this.editable[index].value,
+    };
+    console.log(data);
+    console.log(Object.keys(data)[0]);
+    this.editProfileService.edituserData(this.userData.getUserData().id, data,Object.keys(data)[0]);
   }
   goBack() {
     this.nav.pop();
   }
 }
+  
