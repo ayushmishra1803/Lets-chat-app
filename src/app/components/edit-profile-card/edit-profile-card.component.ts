@@ -6,12 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
   styleUrls: ["./edit-profile-card.component.scss"],
 })
 export class EditProfileCardComponent implements OnInit {
-  @Input() cardConfig: {
-    title: string;
-    value: string;
-    placeholder: string;
-    type: string | number;
-  };
+  @Input() cardConfig:any;
   @Output() onChangeInput = new EventEmitter<string>();
   constructor() {}
 

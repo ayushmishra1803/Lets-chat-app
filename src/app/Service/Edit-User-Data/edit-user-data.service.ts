@@ -6,4 +6,9 @@ import { AngularFirestore } from "@angular/fire/firestore";
 })
 export class EditUserDataService {
   constructor(private angularFire: AngularFirestore) {}
+  edituserData(docId, data) {
+    this.angularFire.collection("users").doc(docId).update(data).then(userdata=>{
+
+    })
+  }
 }

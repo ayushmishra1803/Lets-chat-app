@@ -13,31 +13,31 @@ export class EditProfilePage implements OnInit {
       title: "First Name",
       placeholder: "Jhon",
       value: "",
-      type: "text",
+      type: "text",nameInDb:'first_name'
     },
     {
       title: "Last Name",
       placeholder: "Doe",
       value: "",
-      type: "text",
+      type: "text",nameInDb:'last_name'
     },
     {
       title: "Your Email",
       placeholder: "JhonDoe@unknown.com",
       value: "",
-      type: "text",
+      type: "text",nameInDb:'email'
     },
-    {
-      title: "Your @Username",
-      placeholder: "Jhon@Doe",
-      value: "",
-      type: "text",
-    },
+    // {
+    //   title: "Your @Username",
+    //   placeholder: "Jhon@Doe",
+    //   value: "",
+    //   type: "text",
+    // },
     {
       title: "Your Mobile Number",
-      placeholder: "+91 *******",
+      placeholder: "+91 **********",
       value: "",
-      type: "tel",
+      type: "tel",nameInDb:'mobileNumber'
     },
   ];
   constructor(private userData: UserDataService, private nav: NavController) {}
@@ -49,12 +49,19 @@ export class EditProfilePage implements OnInit {
 
     this.editable[2].value = this.userData.getUserData().email;
 
-    this.editable[3].value = this.userData.getUserData().username;
+    // this.editable[3].value = this.userData.getUserData().username;
 
-    this.editable[4].value = this.userData.getUserData().mobileNumber;
+    this.editable[3].value = this.userData.getUserData().mobileNumber;
   }
+  /*
+  this event is fired when any of the value changes and you hover out  from input in in input 
+  */ 
   onChangeInputValue(event, index) {
     console.log(event);
+    this.editable[index].value=event
+    const data={
+      [this.editable[index].nameInDb]:this.editable[index].value
+    }
   }
   goBack() {
     this.nav.pop();
