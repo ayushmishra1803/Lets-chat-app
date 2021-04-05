@@ -16,7 +16,7 @@ import { UserDataService } from "src/app/Service/userData/user-data.service";
   templateUrl: "./chats.page.html",
   styleUrls: ["./chats.page.scss"],
 })
-export class ChatsPage implements OnInit, AfterContentChecked {
+export class ChatsPage implements OnInit, AfterContentInit {
   constructor(
     private homeChattingService: HomeChatsService,
     private loading: LoadingService,
@@ -25,7 +25,7 @@ export class ChatsPage implements OnInit, AfterContentChecked {
   ) {}
   usersChatSubscription = new Subscription();
 
-  ngAfterContentChecked(): void {
+  ngAfterContentInit(): void {
     this.userchat = [];
     this.activeUser = this.userData.getUserData();
     const userid = this.userData.getUserData().id;

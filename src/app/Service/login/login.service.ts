@@ -41,7 +41,7 @@ export class LoginService {
                   ...data,
                 };
                 //console.log(userData);
-                this.userData.setuserData(userData);
+               this.userData.setuserData(userData);
                 this.userData.setLoginStatus(true);
                 this.loader.hideLoader();
                 this.router.navigate(["/home/chats"], { replaceUrl: true });

@@ -9,13 +9,12 @@ export class UserDataService {
   loginStatus = false;
   setuserData(userData) {
     console.log(userData);
-    
+
     this.userData = userData;
     this.storage
       .set("userData", userData)
       .then((stored) => {
         console.log(this.userData);
-        
       })
       .catch((err) => {
         console.log(err);
