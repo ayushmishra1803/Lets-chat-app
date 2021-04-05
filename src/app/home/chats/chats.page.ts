@@ -1,4 +1,10 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { HomeChatsService } from "src/app/Service/HomeChatService/home-chats.service";
@@ -10,7 +16,7 @@ import { UserDataService } from "src/app/Service/userData/user-data.service";
   templateUrl: "./chats.page.html",
   styleUrls: ["./chats.page.scss"],
 })
-export class ChatsPage implements OnInit, AfterContentInit {
+export class ChatsPage implements OnInit, AfterContentChecked {
   constructor(
     private homeChattingService: HomeChatsService,
     private loading: LoadingService,
@@ -19,7 +25,7 @@ export class ChatsPage implements OnInit, AfterContentInit {
   ) {}
   usersChatSubscription = new Subscription();
 
-  ngAfterContentInit(): void {
+  ngAfterContentChecked(): void {
     this.userchat = [];
     this.activeUser = this.userData.getUserData();
     const userid = this.userData.getUserData().id;
@@ -27,7 +33,6 @@ export class ChatsPage implements OnInit, AfterContentInit {
 
     this.usersChatSubscription.add(
       this.homeChattingService.getActiveUserChats(userid).subscribe((data) => {
-        console.log(data);
         this.loading.hideLoader();
         if (data.length > 0) {
           this.fetchChats(data);
@@ -49,12 +54,10 @@ export class ChatsPage implements OnInit, AfterContentInit {
   }
   fetchChats(userChatData: any[]) {
     this.userchat = [];
-    console.log(this.userchat);
 
     userChatData.map((userSpecificChatId, index) => {
       if (index === 0) {
         this.userchat = [];
-        console.log(this.userchat);
       }
       this.chatsSubscription.add(
         this.homeChattingService
@@ -63,8 +66,6 @@ export class ChatsPage implements OnInit, AfterContentInit {
             userSpecificChatId.firebaseChatId
           )
           .subscribe((data) => {
-            console.log(data);
-
             this.userchat.push({
               userData: data[1],
               chatData: data[0],
