@@ -31,7 +31,11 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
   @ViewChild("chatInputONDOM", { static: false }) chatInput: ElementRef;
   EditMode: boolean = false;
   chatToBeEdited: any = {};
-
+  ngAfterViewChecked(): void {
+    try {
+      this.chatSection.nativeElement.scrollTop = this.chatSection.nativeElement.scrollHeight;
+    } catch (err) {}
+  }
   @ViewChild("chatSection") chatSection: ElementRef;
   ngAfterContentInit(): void {
     if (this.chattingCollection != "") {
@@ -103,9 +107,6 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
           this.userData.getUserData(),
           data
         );
-        try {
-          this.chatSection.nativeElement.scrollTop = this.chatSection.nativeElement.scrollHeight;
-        } catch (err) {}
         this.message = "";
       } else {
         const data = {
@@ -114,9 +115,6 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
           Date: new Date(),
         };
         this.chatting.addMessgaesIfChatExist(this.chattingCollection, data);
-        try {
-          this.chatSection.nativeElement.scrollTop = this.chatSection.nativeElement.scrollHeight;
-        } catch (err) {}
         this.message = "";
       }
     }
