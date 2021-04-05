@@ -13,9 +13,13 @@ import { environment } from "src/environments/environment.prod";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { LoadingComponent } from "./components/loading/loading.component";
-import { IonicStorageModule } from '@ionic/storage';
+import { IonicStorageModule } from "@ionic/storage";
+import { Crop } from "@ionic-native/crop/ngx";
+import { File } from "@ionic-native/file/ngx";
+import { Camera } from "@ionic-native/Camera/ngx";
+
 @NgModule({
-  declarations: [AppComponent,LoadingComponent, ],
+  declarations: [AppComponent, LoadingComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -23,11 +27,15 @@ import { IonicStorageModule } from '@ionic/storage';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule,IonicStorageModule.forRoot()
+    AngularFireAuthModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Crop,
+    Camera,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],

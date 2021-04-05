@@ -3,11 +3,13 @@
     <section style="display: flex; flex-direction: column; align-items: center">
       <ion-avatar style="width: 80px; height: 80px">
         <ion-img
-          src="/assets/chats/user.jfif"
+          id="image"
+          [src]="croppedImagepath"
           style="width: 80px; height: 80px"
         >
         </ion-img>
       </ion-avatar>
+      <ion-button (click)="selectImage()">Edit</ion-button>
       <span class="username">{{activeUserData?.first_name|titlecase}}</span>
       <span class="userData">@{{activeUserData?.username}} </span>
     </section>
