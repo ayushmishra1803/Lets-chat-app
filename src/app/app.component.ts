@@ -52,7 +52,7 @@ export class AppComponent {
           this.userData.setuserData(result);
           console.log(result);
 
-          this.router.navigate(["/login"], { replaceUrl: true });
+          this.router.navigate(["/home/chats"], { replaceUrl: true });
         }
       })
       .catch((err) => {

@@ -24,7 +24,7 @@ export class ChatsPage implements OnInit, AfterContentInit {
     private router: Router
   ) {}
   usersChatSubscription = new Subscription();
-
+  fetchingFirstTym = false;
   ngAfterContentInit(): void {
     this.userchat = [];
     this.activeUser = this.userData.getUserData();
@@ -59,18 +59,47 @@ export class ChatsPage implements OnInit, AfterContentInit {
       if (index === 0) {
         this.userchat = [];
       }
+
       this.chatsSubscription.add(
         this.homeChattingService
           .fetchUserChats(
             userSpecificChatId.chattingUserId,
             userSpecificChatId.firebaseChatId
           )
-          .subscribe((data) => {
-            this.userchat.push({
-              userData: data[1],
-              chatData: data[0],
-              userId: userSpecificChatId.chattingUserId,
-            });
+          .subscribe((data: any) => {
+            console.log(this.userchat);
+
+            if (this.userchat.length <= 0) {
+              this.userchat.push({
+                userData: data[1],
+                chatData: data[0],
+                userId: userSpecificChatId.chattingUserId,
+              });
+            } else if (this.userchat.length > 0) {
+              console.log("Hello from general");
+              let userFound = false;
+              this.userchat.map((userchatDATA, chatIndex) => {
+                if (userchatDATA.userData.email === data[1].email) {
+                  userFound = true;
+                  console.log("Hello from IF");
+
+                  this.userchat[chatIndex] = {
+                    userData: data[1],
+                    chatData: data[0],
+                    userId: userSpecificChatId.chattingUserId,
+                  };
+                }
+                if (this.userchat.length - 1 == chatIndex) {
+                  if (userFound == false) {
+                    this.userchat.push({
+                      userData: data[1],
+                      chatData: data[0],
+                      userId: userSpecificChatId.chattingUserId,
+                    });
+                  }
+                }
+              });
+            }
           })
       );
     });
