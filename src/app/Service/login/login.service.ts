@@ -21,10 +21,9 @@ export class LoginService {
     private userData: UserDataService
   ) {}
   userLogin(email, password) {
-    
     this.loader.showLoader();
     let userData;
-
+    //LoginIN
     this.auth
       .signInWithEmailAndPassword(email, password)
       .then((loginSuccess) => {
