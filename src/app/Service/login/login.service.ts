@@ -21,9 +21,7 @@ export class LoginService {
     private userData: UserDataService
   ) {}
   userLogin(email, password) {
-    setTimeout(() => {
-      this.loader.hideLoader();
-    }, 3000);
+    
     this.loader.showLoader();
     let userData;
 
