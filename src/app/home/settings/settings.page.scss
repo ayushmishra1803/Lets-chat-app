@@ -29,16 +29,14 @@ ion-content {
   align-items: flex-start;
   border-radius: 10px;
   margin-top: 64px;
- 
 }
-.options{
-  
+.options {
   padding-left: 12px;
   color: white;
   font-size: 16px;
   font-family: Roboto Mono, monospace;
 }
-.seceditableblock{
+.seceditableblock {
   background-color: rgb(34, 34, 34);
   width: 100%;
   display: flex;
@@ -46,4 +44,7 @@ ion-content {
   align-items: flex-start;
   border-radius: 10px;
   margin-top: 32px;
+}
+.danger {
+  color: red;
 }

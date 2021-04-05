@@ -42,7 +42,11 @@ export class ChatsPage implements OnInit, AfterContentInit {
   userchat = [];
   activeUser;
   chatsSubscription = new Subscription();
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout((p) => {
+      this.loading.hideLoader();
+    }, 5000);
+  }
   fetchChats(userChatData: any[]) {
     this.userchat = [];
     console.log(this.userchat);

@@ -29,7 +29,7 @@
 
 html,
 body {
-  font-family: "Roboto Mono", monospace  !important;
+  font-family: "Roboto Mono", monospace !important;
 }
 ion-content {
   --background: black;
@@ -39,7 +39,7 @@ ion-toolbar {
   --background: rgb(34, 34, 34);
   font-family: "Roboto Mono", monospace;
 }
-ion-card{
+ion-card {
   --background: rgb(34, 34, 34);
   font-family: "Roboto Mono", monospace;
 }
@@ -49,8 +49,22 @@ ion-modal.loader {
     opacity: 0.8 !important;
   }
 }
-.chat-menu-modal .modal-wrapper{
+.chat-menu-modal .modal-wrapper {
   height: 200px;
   width: 90%;
   border-radius: 10px;
+}
+.my-action-sheet-class {
+  --background: rgb(24, 23, 23);
+  --color: white;
+  font-family: "Roboto Mono", monospace;
+  --backdrop-opacity: 0.8;
+  --button-color: white;
+}
+.Action-sheet-cancelButton {
+  --color: red;
+  --button-color: red;
+}
+* {
+  font-family: "Roboto Mono", monospace;
 }

@@ -43,7 +43,7 @@ export class SettingsPage implements OnInit {
   navigate(path: string) {
     this.router.navigate([path]);
   }
-  camaraUpload() {
+  GalleryImagePicker() {
     this.camera
       .getPicture({
         quality: 100,
@@ -109,13 +109,14 @@ export class SettingsPage implements OnInit {
 
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
-      header: "Select Image source",
-      cssClass: "image-picker",
+      header: "Choose From",
+      cssClass: "my-action-sheet-class",
+      backdropDismiss: true,
       buttons: [
         {
-          text: "Load from Library",
+          text: "Use Library",
           handler: () => {
-            this.camaraUpload();
+            this.GalleryImagePicker();
           },
         },
         {
@@ -127,6 +128,7 @@ export class SettingsPage implements OnInit {
         {
           text: "Cancel",
           role: "cancel",
+          cssClass: ["Action-sheet-cancelButton"],
         },
       ],
     });
