@@ -1,16 +1,27 @@
 <ion-content>
   <div class="userImage">
     <section style="display: flex; flex-direction: column; align-items: center">
-      <ion-avatar style="width: 80px; height: 80px">
-        <ion-img
-          id="image"
-          [src]="activeUserData?.profileImage?activeUserData?.profileImage:croppedImagepath"
-          style="width: 80px; height: 80px"
-        >
-        </ion-img>
-      </ion-avatar>
-      <ion-button (click)="selectImage()">Edit</ion-button>
-      <span class="username">{{activeUserData?.first_name|titlecase}}</span>
+      <div class="avtar-rapping-div">
+       <section>
+        <ion-avatar style="width: 110px; height: 110px">
+          <ion-img
+            id="image"
+            [src]="activeUserData?.profileImage?activeUserData?.profileImage:croppedImagepath"
+            style="width: 110px; height: 110px"(click)="selectImage()"
+          >
+          </ion-img>
+        </ion-avatar>
+       </section>
+        <!-- <section class="avtar-edit-pen">
+          <ion-icon name="pencil" color="light"></ion-icon>
+        </section> -->
+      </div>
+     
+     
+      <span class="username"
+        >{{activeUserData?.first_name|titlecase}}
+        {{activeUserData?.last_name|titlecase}}
+      </span>
       <span class="userData">@{{activeUserData?.username}} </span>
     </section>
   </div>
