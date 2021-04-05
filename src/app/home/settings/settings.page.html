@@ -4,7 +4,7 @@
       <ion-avatar style="width: 80px; height: 80px">
         <ion-img
           id="image"
-          [src]="croppedImagepath"
+          [src]="activeUserData?.profileImage?activeUserData?.profileImage:croppedImagepath"
           style="width: 80px; height: 80px"
         >
         </ion-img>

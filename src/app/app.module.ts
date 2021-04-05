@@ -17,7 +17,7 @@ import { IonicStorageModule } from "@ionic/storage";
 import { Crop } from "@ionic-native/crop/ngx";
 import { File } from "@ionic-native/file/ngx";
 import { Camera } from "@ionic-native/Camera/ngx";
-
+import { AngularFireStorageModule, BUCKET } from "@angular/fire/storage";
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
   entryComponents: [],
@@ -29,6 +29,7 @@ import { Camera } from "@ionic-native/Camera/ngx";
     AngularFirestoreModule,
     AngularFireAuthModule,
     IonicStorageModule.forRoot(),
+    AngularFireStorageModule,
   ],
   providers: [
     StatusBar,
@@ -37,6 +38,7 @@ import { Camera } from "@ionic-native/Camera/ngx";
     Camera,
     File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: BUCKET, useValue: "gs://letschat-3f883.appspot.com" },
   ],
   bootstrap: [AppComponent],
 })

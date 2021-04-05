@@ -6,6 +6,7 @@ import { Camera, CameraOptions } from "@ionic-native/Camera/ngx";
 import { Crop } from "@ionic-native/crop/ngx";
 import { File } from "@ionic-native/file/ngx";
 import { ActionSheetController } from "@ionic/angular";
+import { ImageUploadService } from "src/app/Service/imageUploadService/image-upload.service";
 
 @Component({
   selector: "app-settings",
@@ -27,7 +28,8 @@ export class SettingsPage implements OnInit {
     private camera: Camera,
     private crop: Crop,
     public actionSheetController: ActionSheetController,
-    private file: File
+    private file: File,
+    private imageuplaodService: ImageUploadService
   ) {}
   activeUserData: any = {};
 
@@ -100,6 +102,11 @@ export class SettingsPage implements OnInit {
     this.file.readAsDataURL(filePath, imageName).then(
       (base64) => {
         this.croppedImagepath = base64;
+        this.activeUserData.profileImage = base64;
+        this.imageuplaodService.uploadProfileImageImage(
+          base64,
+          this.userData.getUserData().id
+        );
       },
       (error) => {
         alert("Error in showing image" + error);
