@@ -13,7 +13,7 @@ import { ChattingLongHoldMenuComponent } from "src/app/components/chatting-long-
 import { ChattingService } from "src/app/Service/chattingService/chatting.service";
 import { UsersDatafromFirebaseService } from "src/app/Service/fetchingUsersDataFromFirebase/users-datafrom-firebase.service";
 import { UserDataService } from "src/app/Service/userData/user-data.service";
-
+import { Camera, CameraOptions } from "@ionic-native/Camera/ngx";
 @Component({
   selector: "app-chating",
   templateUrl: "./chating.page.html",
@@ -26,7 +26,8 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     private chatting: ChattingService,
     private userData: UserDataService,
     private notification: AngularFireMessaging,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private camera: Camera
   ) {}
   @ViewChild("chatInputONDOM", { static: false }) chatInput: ElementRef;
   EditMode: boolean = false;
@@ -167,5 +168,22 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     );
     this.chatToBeEdited = {};
     this.message = "";
+  }
+  SendPhoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    };
+    this.camera.getPicture(options).then(
+      (imageData) => {
+        console.log(imageData);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 }

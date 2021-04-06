@@ -66,13 +66,18 @@
     </section>
     <section class="inputSection">
       <ion-item>
+       
+       
+          <ion-icon name="camera" color="light" (click)="SendPhoto()"></ion-icon>
+       
+
         <ion-input
           type="text"
           placeholder="Enter Your Message..."
           color="light"
           [(ngModel)]="message"
           (keyup.enter)="sendMessage()"
-          #chatInputONDOM
+          #chatInputONDOM style="margin-left: 5%;"
         >
         </ion-input>
         <div slot="end">
