@@ -36,7 +36,8 @@ export class ContactsPage implements OnInit, OnDestroy {
   UsersNotonApp: any[] = [];
   userContactList: any[] = [];
   dbLength: number;
-  pushedContacts = [];
+  ContactOnAppPushedContacts = [];
+  ContactNotOnAppPushedContacts = [];
   ngOnInit() {
     this.loading.showLoader();
     this.dbLengthSubscription = this.contactService
@@ -98,48 +99,62 @@ export class ContactsPage implements OnInit, OnDestroy {
       userAllContacts = contacts;
 
       userAllContacts.map((conatct) => {
-        const currentConact = conatct;
+        let currentConact = conatct;
         conatct.phoneNumbers.map((number, phonenumberIndex) => {
-          console.log(number);
-
-          if (
-            number.value[0] +
-              number.value[1] +
-              number.value[2] +
-              number.value[3] ===
-            "+91 "
-          ) {
+          if (number.value[0] + number.value[1] + number.value[2] === "+91") {
             //
-            currentConact.phoneNumbers.value = number.value.slice(4);
+            currentConact.phoneNumbers.value = number.value.slice(3);
 
             //
             //
           }
+
           this.dbContactlistUser.map((userontheApp) => {
             if (currentConact.phoneNumbers.value != undefined) {
+              currentConact.phoneNumbers.value = currentConact.phoneNumbers.value.replace(
+                /\s/g,
+                ""
+              );
               if (
-                !this.pushedContacts.includes(currentConact.phoneNumbers.value)
+                userontheApp.mobileNumber === currentConact.phoneNumbers.value
               ) {
-                this.pushedContacts.push(currentConact.phoneNumbers.value);
                 if (
-                  userontheApp.mobileNumber ===
-                  currentConact.phoneNumbers.value.replace(/\s+/g, "")
+                  !this.ContactOnAppPushedContacts.includes(
+                    currentConact.phoneNumbers.value
+                  )
                 ) {
+                  console.log("not included");
+                  console.log(currentConact.phoneNumbers.value);
                   this.loading.hideLoader();
                   this.UsersOnApp.push({
                     mobileData: { ...currentConact },
                     dbData: { ...userontheApp },
                   });
-                } else {
+                  this.ContactOnAppPushedContacts.push(
+                    currentConact.phoneNumbers.value
+                  );
+                }
+              } else {
+                if (
+                  !this.ContactNotOnAppPushedContacts.includes(
+                    currentConact.phoneNumbers.value
+                  )
+                ) {
+                  console.log("not included");
+                  console.log(currentConact.phoneNumbers.value);
                   this.loading.hideLoader();
                   this.UsersNotonApp.push({
                     mobileData: { ...currentConact },
                     dbData: { ...userontheApp },
                   });
+                  this.ContactNotOnAppPushedContacts.push(
+                    currentConact.phoneNumbers.value
+                  );
                 }
               }
             }
           });
+          console.log(this.ContactOnAppPushedContacts);
         });
       });
     });
