@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
   templateUrl: "./contacts.page.html",
   styleUrls: ["./contacts.page.scss"],
 })
-export class ContactsPage implements OnInit,OnDestroy {
+export class ContactsPage implements OnInit, OnDestroy {
   constructor(
     private contact: Contacts,
     private contactService: ContactService,
@@ -36,6 +36,7 @@ export class ContactsPage implements OnInit,OnDestroy {
   UsersNotonApp: any[] = [];
   userContactList: any[] = [];
   dbLength: number;
+  pushedContacts = [];
   ngOnInit() {
     this.loading.showLoader();
     this.dbLengthSubscription = this.contactService
@@ -99,32 +100,43 @@ export class ContactsPage implements OnInit,OnDestroy {
       userAllContacts.map((conatct) => {
         const currentConact = conatct;
         conatct.phoneNumbers.map((number, phonenumberIndex) => {
-          if (number.value[0] + number.value[1] + number.value[2] === "+91") {
+          console.log(number);
+
+          if (
+            number.value[0] +
+              number.value[1] +
+              number.value[2] +
+              number.value[3] ===
+            "+91 "
+          ) {
             //
-            currentConact.phoneNumbers.value = number.value.slice(3);
+            currentConact.phoneNumbers.value = number.value.slice(4);
 
             //
             //
           }
-
           this.dbContactlistUser.map((userontheApp) => {
             if (currentConact.phoneNumbers.value != undefined) {
               if (
-                userontheApp.mobileNumber ===
-                currentConact.phoneNumbers.value.replace(/\s+/g, "")
+                !this.pushedContacts.includes(currentConact.phoneNumbers.value)
               ) {
-                this.loading.hideLoader();
-                this.UsersOnApp.push({
-                  mobileData: { ...currentConact },
-                  dbData: { ...userontheApp },
-                });
-                console.log(this.UsersOnApp);
-              } else {
-                this.loading.hideLoader();
-                this.UsersNotonApp.push({
-                  mobileData: { ...currentConact },
-                  dbData: { ...userontheApp },
-                });
+                this.pushedContacts.push(currentConact.phoneNumbers.value);
+                if (
+                  userontheApp.mobileNumber ===
+                  currentConact.phoneNumbers.value.replace(/\s+/g, "")
+                ) {
+                  this.loading.hideLoader();
+                  this.UsersOnApp.push({
+                    mobileData: { ...currentConact },
+                    dbData: { ...userontheApp },
+                  });
+                } else {
+                  this.loading.hideLoader();
+                  this.UsersNotonApp.push({
+                    mobileData: { ...currentConact },
+                    dbData: { ...userontheApp },
+                  });
+                }
               }
             }
           });
@@ -139,7 +151,6 @@ export class ContactsPage implements OnInit,OnDestroy {
       .catch((err) => {});
   }
   GotChat(contact) {
-    console.log(contact);
     this.router.navigate(["/chating/" + contact.dbData.id]);
   }
 }
