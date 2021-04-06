@@ -65,7 +65,7 @@ export class EditProfilePage implements OnInit {
   /*
   this event is fired when any of the value changes and you hover out  from input in in input 
   */
-  onChangeInputValue(event, index,) {
+  onChangeInputValue(event, index) {
     console.log(event);
     this.editable[index].value = event;
     const data = {
@@ -73,10 +73,13 @@ export class EditProfilePage implements OnInit {
     };
     console.log(data);
     console.log(Object.keys(data)[0]);
-    this.editProfileService.edituserData(this.userData.getUserData().id, data,Object.keys(data)[0]);
+    this.editProfileService.edituserData(
+      this.userData.getUserData().id,
+      data,
+      Object.keys(data)[0]
+    );
   }
   goBack() {
     this.nav.pop();
   }
 }
-  
