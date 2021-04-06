@@ -14,6 +14,7 @@ import { ChattingService } from "src/app/Service/chattingService/chatting.servic
 import { UsersDatafromFirebaseService } from "src/app/Service/fetchingUsersDataFromFirebase/users-datafrom-firebase.service";
 import { UserDataService } from "src/app/Service/userData/user-data.service";
 import { Camera, CameraOptions } from "@ionic-native/Camera/ngx";
+import { ImageUploadService } from "src/app/Service/imageUploadService/image-upload.service";
 @Component({
   selector: "app-chating",
   templateUrl: "./chating.page.html",
@@ -27,7 +28,7 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     private userData: UserDataService,
     private notification: AngularFireMessaging,
     private modalController: ModalController,
-    private camera: Camera
+    private camera: Camera,private uploadPhotoService:ImageUploadService
   ) {}
   @ViewChild("chatInputONDOM", { static: false }) chatInput: ElementRef;
   EditMode: boolean = false;
@@ -173,13 +174,13 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     const options: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
     };
     this.camera.getPicture(options).then(
       (imageData) => {
-        console.log(imageData);
+       this.uploadPhotoService.UploadImage(imageData,this.userData.getUserData().id,this.chattingCollection)
       },
       (err) => {
         console.error(err);
