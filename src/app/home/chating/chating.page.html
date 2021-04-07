@@ -36,7 +36,7 @@
           appLongPress
           (longPress)="onLongHold(chat)"
         >
-          <section class="textFromActiveUserMessage">
+          <section class="textFromActiveUserMessage" (click)="viewPhoto(chat.imageUrl)">
             <span class="message"> {{chat.message}} </span>
           </section>
           <section class="avatarActiveChattingSection">
@@ -58,7 +58,7 @@
               />
             </ion-avatar>
           </section>
-          <section class="textFromOtherUserMessage">
+          <section class="textFromOtherUserMessage" >
             <span class="message"> {{chat.message}} </span>
           </section>
         </section>

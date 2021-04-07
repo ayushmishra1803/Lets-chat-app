@@ -15,6 +15,7 @@ import { UsersDatafromFirebaseService } from "src/app/Service/fetchingUsersDataF
 import { UserDataService } from "src/app/Service/userData/user-data.service";
 import { Camera, CameraOptions } from "@ionic-native/Camera/ngx";
 import { ImageUploadService } from "src/app/Service/imageUploadService/image-upload.service";
+import { ViewerModalComponent } from "ngx-ionic-image-viewer";
 @Component({
   selector: "app-chating",
   templateUrl: "./chating.page.html",
@@ -28,7 +29,8 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     private userData: UserDataService,
     private notification: AngularFireMessaging,
     private modalController: ModalController,
-    private camera: Camera,private uploadPhotoService:ImageUploadService
+    private camera: Camera,
+    private uploadPhotoService: ImageUploadService
   ) {}
   @ViewChild("chatInputONDOM", { static: false }) chatInput: ElementRef;
   EditMode: boolean = false;
@@ -180,11 +182,30 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     };
     this.camera.getPicture(options).then(
       (imageData) => {
-       this.uploadPhotoService.UploadImage(imageData,this.userData.getUserData().id,this.chattingCollection)
+        this.uploadPhotoService.UploadImage(
+          imageData,
+          this.userData.getUserData().id,
+          this.chattingCollection
+        );
       },
       (err) => {
         console.error(err);
       }
     );
+  }
+  async viewPhoto(src) {
+    console.log(src);
+    
+    const modal = await this.modalController.create({
+      component: ViewerModalComponent,
+      componentProps: {
+        src: src,
+      },
+   cssClass: 'ion-img-viewer',
+      keyboardClose: true,
+      showBackdrop: true,
+    });
+
+    modal.present();
   }
 }
