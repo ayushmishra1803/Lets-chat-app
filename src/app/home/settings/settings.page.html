@@ -2,22 +2,21 @@
   <div class="userImage">
     <section style="display: flex; flex-direction: column; align-items: center">
       <div class="avtar-rapping-div">
-       <section>
-        <ion-avatar style="width: 110px; height: 110px">
-          <ion-img
-            id="image"
-            [src]="activeUserData?.profileImage?activeUserData?.profileImage:croppedImagepath"
-            style="width: 110px; height: 110px"(click)="selectImage()"
-          >
-          </ion-img>
-        </ion-avatar>
-       </section>
+        <section>
+          <ion-avatar style="width: 110px; height: 110px">
+            <ion-img
+              id="image"
+              [src]="activeUserData?.profileImage?activeUserData?.profileImage:croppedImagepath"
+              style="width: 110px; height: 110px"
+            >
+            </ion-img>
+          </ion-avatar>
+        </section>
         <!-- <section class="avtar-edit-pen">
           <ion-icon name="pencil" color="light"></ion-icon>
         </section> -->
       </div>
-     
-     
+
       <span class="username"
         >{{activeUserData?.first_name|titlecase}}
         {{activeUserData?.last_name|titlecase}}
@@ -26,6 +25,34 @@
     </section>
   </div>
   <div class="editableblocks">
+    <section
+      style="display: flex; flex-direction: column; width: 100%; height: 60px"
+    >
+      <section
+        style="
+          display: flex;
+          justify-content: flex-start;
+          width: 100%;
+          align-items: center;
+          height: 50px;
+        "
+        (click)="selectImage()"
+      >
+        <section style="padding-left: 16px">
+          <ion-icon
+            name="camera-outline"
+            color="light"
+            style="font-size: 30px"
+          ></ion-icon>
+        </section>
+        <section>
+          <span class="options">Change Profile Image</span>
+        </section>
+      </section>
+      <section>
+        <hr style="background-color: #f05d81; height: 1.5px; width: 95%" />
+      </section>
+    </section>
     <section
       style="display: flex; flex-direction: column; width: 100%; height: 60px"
     >
@@ -51,33 +78,6 @@
             (click)="navigate('/home/settings/edit-profile')"
             >Edit Profile</span
           >
-        </section>
-      </section>
-      <section>
-        <hr style="background-color: #f05d81; height: 1.5px; width: 95%" />
-      </section>
-    </section>
-    <section
-      style="display: flex; flex-direction: column; width: 100%; height: 60px"
-    >
-      <section
-        style="
-          display: flex;
-          justify-content: flex-start;
-          width: 100%;
-          align-items: center;
-          height: 50px;
-        "
-      >
-        <section style="padding-left: 16px">
-          <ion-icon
-            name="camera-outline"
-            color="light"
-            style="font-size: 30px"
-          ></ion-icon>
-        </section>
-        <section>
-          <span class="options">Change Profile Image</span>
         </section>
       </section>
       <section>
