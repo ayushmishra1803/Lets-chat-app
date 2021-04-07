@@ -16,6 +16,7 @@ import { UserDataService } from "src/app/Service/userData/user-data.service";
 import { Camera, CameraOptions } from "@ionic-native/Camera/ngx";
 import { ImageUploadService } from "src/app/Service/imageUploadService/image-upload.service";
 import { ViewerModalComponent } from "ngx-ionic-image-viewer";
+import { SpeechRecognition } from "@ionic-native/speech-recognition/ngx";
 @Component({
   selector: "app-chating",
   templateUrl: "./chating.page.html",
@@ -30,7 +31,8 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     private notification: AngularFireMessaging,
     private modalController: ModalController,
     private camera: Camera,
-    private uploadPhotoService: ImageUploadService
+    private uploadPhotoService: ImageUploadService,
+    private speechRecognition: SpeechRecognition
   ) {}
   @ViewChild("chatInputONDOM", { static: false }) chatInput: ElementRef;
   EditMode: boolean = false;
@@ -134,10 +136,12 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
         present.present();
         present.onDidDismiss().then((onDissmiss) => {
           console.log(onDissmiss);
-          if (onDissmiss.data.data === "Delete") {
-            this.deletemessage(selectedChat);
-          } else if (onDissmiss.data.data === "Edit") {
-            this.editMode(selectedChat);
+          if (onDissmiss.data) {
+            if (onDissmiss.data.data === "Delete") {
+              this.deletemessage(selectedChat);
+            } else if (onDissmiss.data.data === "Edit") {
+              this.editMode(selectedChat);
+            }
           }
         });
       })
@@ -195,17 +199,35 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
   }
   async viewPhoto(src) {
     console.log(src);
-    
+
     const modal = await this.modalController.create({
       component: ViewerModalComponent,
       componentProps: {
         src: src,
       },
-   cssClass: 'ion-img-viewer',
+      cssClass: "ion-img-viewer",
       keyboardClose: true,
       showBackdrop: true,
     });
 
     modal.present();
+  }
+  speechToTextRequestPermission() {
+    this.speechRecognition.requestPermission().then(
+      () => this.turnSpeechToText(),
+      () => console.log("Denied")
+    );
+  }
+
+  turnSpeechToText() {
+    this.speechRecognition.startListening().subscribe(
+      (matches: string[]) => {
+        this.message = this.message + matches[0];
+
+
+     
+      },
+      (onerror) => console.log("error:", onerror)
+    );
   }
 }

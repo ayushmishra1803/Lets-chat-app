@@ -12,6 +12,7 @@ import { AngularFireMessagingModule } from "@angular/fire/messaging";
 import { LongPressDirective } from "src/app/Directives/longPressDirective/long-press.directive";
 import { ChattingLongHoldMenuComponent } from "src/app/components/chatting-long-hold-menu/chatting-long-hold-menu.component";
 import { NgxIonicImageViewerModule } from "ngx-ionic-image-viewer";
+import { SpeechRecognition } from "@ionic-native/speech-recognition/ngx";
 @NgModule({
   imports: [
     CommonModule,
@@ -26,5 +27,6 @@ import { NgxIonicImageViewerModule } from "ngx-ionic-image-viewer";
     LongPressDirective,
     ChattingLongHoldMenuComponent,
   ],
+  providers: [SpeechRecognition],
 })
 export class ChatingPageModule {}

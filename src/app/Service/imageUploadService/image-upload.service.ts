@@ -10,7 +10,8 @@ import { EditUserDataService } from "../Edit-User-Data/edit-user-data.service";
 export class ImageUploadService {
   constructor(
     private angularStorage: AngularFireStorage,
-    private editUserData: EditUserDataService,private chattingService:ChattingService
+    private editUserData: EditUserDataService,
+    private chattingService: ChattingService
   ) {}
   uploadProfileImageImage(imagefile, userId) {
     const storage = this.angularStorage.storage.ref(userId);
@@ -41,14 +42,15 @@ export class ImageUploadService {
       .then((uploaded) => {
         const ref = this.angularStorage.ref(`photos/${uniqueuuid}`);
         ref.getDownloadURL().subscribe((url) => {
-         // console.log(url);
+          // console.log(url);
           const data = {
             messageType: "Image",
             imageUrl: url,
             sender: SenderUuid,
-            Date: new Date(),message:"Photo"
+            Date: new Date(),
+            message: "Photo",
           };
-          this.chattingService.addMessgaesIfChatExist(collectionId,data)
+          this.chattingService.addMessgaesIfChatExist(collectionId, data);
         });
       });
   }
