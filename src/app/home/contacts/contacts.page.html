@@ -19,7 +19,11 @@
     <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
   </section>
   <div class="list" *ngFor="let conatct of UsersOnApp">
-    <div class="listiteams" (click)="GotChat(conatct)">
+    <div
+      class="listiteams"
+      (click)="GotChat(conatct)"
+      *ngIf="conatct.dbData.id != activeuser.id"
+    >
       <section
         style="
           display: flex;
@@ -31,7 +35,10 @@
         <section style="display: flex; width: 100%; height: 100%">
           <section>
             <ion-avatar>
-              <ion-img src="/assets/chats/user.jfif"> </ion-img>
+              <ion-img
+                [src]="conatct.dbData.profileImage?conatct.dbData.profileImage:'/assets/chats/user.jfif'"
+              >
+              </ion-img>
             </ion-avatar>
           </section>
           <section
@@ -120,10 +127,21 @@
               </section>
             </section>
             <section style="width: 20%">
-              <div style="display: flex; justify-content: flex-end">
-                <ion-button color="primary" (click)="inviteOthers()">
-                  Invite</ion-button
-                >
+              <div
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  height: 100%;
+                  align-items: center;
+                  box-sizing: border-box;
+                  padding-right: 5%;
+                "
+              >
+                <ion-icon
+                  name="paper-plane"
+                  color="light"
+                  (click)="inviteOthers()"
+                ></ion-icon>
               </div>
             </section>
           </section>

@@ -7,6 +7,7 @@ import { Crop } from "@ionic-native/crop/ngx";
 import { File } from "@ionic-native/file/ngx";
 import { ActionSheetController } from "@ionic/angular";
 import { ImageUploadService } from "src/app/Service/imageUploadService/image-upload.service";
+import { EditUserDataService } from "src/app/Service/Edit-User-Data/edit-user-data.service";
 
 @Component({
   selector: "app-settings",
@@ -16,7 +17,7 @@ import { ImageUploadService } from "src/app/Service/imageUploadService/image-upl
 export class SettingsPage implements OnInit {
   croppedImagepath = "/assets/chats/user.jfif";
   isLoading = false;
-
+  status: "";
   imagePickerOptions = {
     maximumImagesCount: 1,
     quality: 50,
@@ -29,12 +30,16 @@ export class SettingsPage implements OnInit {
     private crop: Crop,
     public actionSheetController: ActionSheetController,
     private file: File,
-    private imageuplaodService: ImageUploadService
+    private imageuplaodService: ImageUploadService,
+    private editUserDataService: EditUserDataService
   ) {}
   activeUserData: any = {};
 
   ngOnInit() {
     this.activeUserData = this.userData.getUserData();
+    this.status = this.userData.getUserData().status
+      ? this.userData.getUserData().status
+      : "Hey! There I am using lets chat";
   }
 
   logOut() {
@@ -140,5 +145,16 @@ export class SettingsPage implements OnInit {
       ],
     });
     await actionSheet.present();
+  }
+  onStatusChanged(event) {
+    console.log(event.target.value);
+    const data = {
+      status: event.target.value,
+    };
+    this.editUserDataService.edituserData(
+      this.userData.getUserData().id,
+      data,
+      "status"
+    );
   }
 }

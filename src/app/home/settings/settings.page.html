@@ -24,6 +24,45 @@
       <span class="userData">@{{activeUserData?.username}} </span>
     </section>
   </div>
+
+  <div class="editableblocks">
+    <section style="display: flex; flex-direction: column; width: 100%">
+      <section
+        style="
+          display: flex;
+          justify-content: flex-start;
+          width: 100%;
+          align-items: center;
+          height: 50px;
+        "
+      >
+        <section style="padding-left: 16px">
+          <ion-icon
+            name="document-text"
+            color="light"
+            style="font-size: 30px"
+          ></ion-icon>
+        </section>
+        <section>
+          <span class="options">Status</span>
+        </section>
+      </section>
+      <section style="color: white">
+        <ion-item style="--background: rgb(34, 34, 34)">
+          <ion-input
+            type="text"
+            style="color: white"
+            [(ngModel)]="status"
+            (change)="onStatusChanged($event)"
+          ></ion-input>
+        </ion-item>
+      </section>
+      <section>
+        <hr style="background-color: #f05d81; height: 1.5px; width: 95%" />
+      </section>
+    </section>
+  </div>
+
   <div class="editableblocks">
     <section
       style="display: flex; flex-direction: column; width: 100%; height: 60px"
@@ -87,33 +126,6 @@
   </div>
 
   <div class="seceditableblock">
-    <section
-      style="display: flex; flex-direction: column; width: 100%; height: 60px"
-    >
-      <section
-        style="
-          display: flex;
-          justify-content: flex-start;
-          width: 100%;
-          align-items: center;
-          height: 50px;
-        "
-      >
-        <section style="padding-left: 16px">
-          <ion-icon
-            name="star"
-            style="font-size: 30px"
-            color="warning"
-          ></ion-icon>
-        </section>
-        <section>
-          <span class="options">Stared Messages</span>
-        </section>
-      </section>
-      <section>
-        <hr style="background-color: #f05d81; height: 1.5px; width: 95%" />
-      </section>
-    </section>
     <section
       style="display: flex; flex-direction: column; width: 100%; height: 60px"
     >

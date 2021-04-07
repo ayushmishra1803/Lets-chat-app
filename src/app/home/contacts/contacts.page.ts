@@ -28,6 +28,7 @@ export class ContactsPage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     throw new Error("Method not implemented.");
   }
+  activeuser;
   userContacts: any[] = [];
   dbContactsSubscription: Subscription;
   dbContactlistUser: any[] = [];
@@ -39,6 +40,7 @@ export class ContactsPage implements OnInit, OnDestroy {
   ContactOnAppPushedContacts = [];
   ContactNotOnAppPushedContacts = [];
   ngOnInit() {
+    this.activeuser=this.userData.getUserData();
     this.loading.showLoader();
     this.dbLengthSubscription = this.contactService
       .getLengthOfDataFromDb()
