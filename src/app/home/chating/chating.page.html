@@ -85,11 +85,19 @@
         >
         </ion-input>
         <ion-icon
+          name="images"
+          color="light"
+          *ngIf="message === '' "
+          style="margin-right: 3%"
+          (click)="sendImageFromGalley()"
+        ></ion-icon>
+        <ion-icon
           name="mic"
           color="light"
           *ngIf="message === '' "
           (click)="speechToTextRequestPermission()"
         ></ion-icon>
+
         <div slot="end" *ngIf="message != '' ">
           <span
             [class]="message==='' ?'unactiveSend':'activeSend'"

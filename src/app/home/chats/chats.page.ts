@@ -1,10 +1,4 @@
-import {
-  AfterContentChecked,
-  AfterContentInit,
-  Component,
-  OnDestroy,
-  OnInit,
-} from "@angular/core";
+import { AfterContentInit, Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { HomeChatsService } from "src/app/Service/HomeChatService/home-chats.service";
@@ -76,12 +70,10 @@ export class ChatsPage implements OnInit, AfterContentInit {
                 userId: userSpecificChatId.chattingUserId,
               });
             } else if (this.userchat.length > 0) {
-              console.log("Hello from general");
               let userFound = false;
               this.userchat.map((userchatDATA, chatIndex) => {
                 if (userchatDATA.userData.email === data[1].email) {
                   userFound = true;
-                  console.log("Hello from IF");
 
                   this.userchat[chatIndex] = {
                     userData: data[1],
@@ -105,11 +97,10 @@ export class ChatsPage implements OnInit, AfterContentInit {
     });
   }
   goToChats(uuid) {
-    this.usersChatSubscription.unsubscribe();
-    this.chatsSubscription.unsubscribe();
     this.router.navigate(["/chating/" + uuid]);
   }
   goToContacts() {
     this.router.navigate(["/home/contacts"]);
   }
+ 
 }

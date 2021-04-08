@@ -176,6 +176,10 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     this.chatToBeEdited = {};
     this.message = "";
   }
+
+  /* 
+  this method is responsible for selecting images from cameara 
+*/
   SendPhoto() {
     const options: CameraOptions = {
       quality: 100,
@@ -212,22 +216,48 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
 
     modal.present();
   }
+  /* 
+ this method is responsible for Taking Permission for speech 
+*/
   speechToTextRequestPermission() {
     this.speechRecognition.requestPermission().then(
       () => this.turnSpeechToText(),
       () => console.log("Denied")
     );
   }
-
+  /* 
+ this method is responsible for Converting speech into text
+*/
   turnSpeechToText() {
     this.speechRecognition.startListening().subscribe(
       (matches: string[]) => {
         this.message = this.message + matches[0];
-
-
-     
       },
       (onerror) => console.log("error:", onerror)
     );
+  }
+  /* 
+  this method is responsible for selecting images from gallery 
+  */
+  sendImageFromGalley() {
+    this.camera
+      .getPicture({
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        targetWidth: 500, //what widht you want after capaturing
+        targetHeight: 500,
+      })
+      .then((imageData) => {
+        this.uploadPhotoService.UploadImage(
+          imageData,
+          this.userData.getUserData().id,
+          this.chattingCollection
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
