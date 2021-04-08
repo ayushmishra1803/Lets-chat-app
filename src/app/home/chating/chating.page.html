@@ -61,7 +61,10 @@
               />
             </ion-avatar>
           </section>
-          <section class="textFromOtherUserMessage">
+          <section
+            class="textFromOtherUserMessage"
+            (click)="viewPhoto(chat.imageUrl)"
+          >
             <span class="message"> {{chat.message}} </span>
           </section>
         </section>
