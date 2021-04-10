@@ -8,7 +8,8 @@ const routes: Routes = [
     path: "home",
     loadChildren: () =>
       import("./home/home.module").then((m) => m.HomePageModule),
-    canActivate: [AuthGuardGuard],canActivateChild:[AuthChildGuard]
+    canActivate: [AuthGuardGuard],
+    canActivateChild: [AuthChildGuard],
   },
   {
     path: "",
@@ -33,11 +34,19 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'chating/:uuid',
-    loadChildren: () => import('./home/chating/chating.module').then( m => m.ChatingPageModule)
+    path: "chating/:uuid",
+    loadChildren: () =>
+      import("./home/chating/chating.module").then((m) => m.ChatingPageModule),
+    canActivate: [AuthGuardGuard],
   },
- 
-
+  {
+    path: "profile-page",
+    loadChildren: () =>
+      import("./home/profile-page/profile-page.module").then(
+        (m) => m.ProfilePagePageModule
+      ),
+    canActivate: [AuthGuardGuard],
+  },
 ];
 
 @NgModule({
@@ -45,6 +54,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
   exports: [RouterModule],
-  providers: [AuthGuardGuard,AuthChildGuard],
+  providers: [AuthGuardGuard, AuthChildGuard],
 })
 export class AppRoutingModule {}
