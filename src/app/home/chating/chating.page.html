@@ -7,7 +7,7 @@
             <ion-back-button color="light"></ion-back-button>
           </ion-buttons>
         </section>
-        <section class="PicAndname">
+        <section class="PicAndname" (click)="goToProfile()">
           <section class="avatarInnerSection">
             <ion-avatar class="avatarImage">
               <img
@@ -55,7 +55,7 @@
           *ngIf="chat.sender != activateUser.id"
         >
           <section class="avatarOtherChattingSection">
-            <ion-avatar class="avatarImage">
+            <ion-avatar class="avatarImage" (click)="goToProfile()">
               <img
                 [src]="chatingUser?.profileImage?chatingUser?.profileImage:'/assets/chats/user.jfif'"
               />

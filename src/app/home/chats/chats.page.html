@@ -24,55 +24,67 @@
     <ion-searchbar
       style="width: 90%"
       placeholder="    Search for users"
+      (keyup)="searchChat($event)"
     ></ion-searchbar>
   </section>
-  <div class="list" *ngFor="let user of userchat">
-    <div class="listiteams" (click)="goToChats(user.userId)">
-      <section style="display: flex; width: 70%; height: 100%">
-        <section>
-          <ion-avatar style="height: 55px; width: 55px">
-            <ion-img
-              [src]="user.userData?.profileImage?user.userData?.profileImage:'/assets/chats/user.jfif'"
+  <div *ngIf="userchat.length>0">
+    <div class="list" *ngFor="let user of userchat">
+      <div class="listiteams">
+        <section style="display: flex; width: 70%; height: 100%">
+          <section>
+            <ion-avatar
+              style="height: 55px; width: 55px"
+              (click)="openProfileModal(user.userId,user.userData)"
             >
-            </ion-img>
-          </ion-avatar>
+              <ion-img
+                [src]="user.userData?.profileImage?user.userData?.profileImage:'/assets/chats/user.jfif'"
+              >
+              </ion-img>
+            </ion-avatar>
+          </section>
+          <section
+            (click)="goToChats(user.userId,user.userData)"
+            style="
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              padding-left: 16px;
+            "
+          >
+            <section>
+              <span class="username"
+                >{{user?.userData?.first_name}}
+                {{user?.userData?.last_name}}</span
+              >
+            </section>
+            <section *ngIf="user.chatData[user.chatData.length-1]">
+              <span class="usermessage"
+                >{{user?.chatData[user.chatData.length-1]?.sender===activeUser.id?'You:':''}}
+                {{user.chatData[user.chatData.length-1].message}}</span
+              >
+            </section>
+          </section>
         </section>
+
         <section
           style="
+            width: 30%;
             height: 100%;
             display: flex;
-            flex-direction: column;
+            justify-content: flex-end;
             align-items: flex-start;
-            padding-left: 16px;
           "
         >
-          <section>
-            <span class="username"
-              >{{user?.userData?.first_name}}
-              {{user?.userData?.last_name}}</span
-            >
-          </section>
-          <section>
-            <span class="usermessage"
-              >{{user?.chatData[user.chatData.length-1]?.sender===activeUser.id?'You:':''}}
-              {{user.chatData[user.chatData.length-1].message}}</span
-            >
-          </section>
+          <span class="messageData"> {{user.Date}} </span>
         </section>
-      </section>
-
-      <section
-        style="
-          width: 30%;
-          height: 100%;
-          display: flex;
-          justify-content: flex-end;
-          align-items: flex-start;
-        "
-      >
-        <span class="messageData"> {{user.Date}} </span>
-      </section>
+      </div>
+      <div>
+        <hr style="background-color: #f05d81; height: 2px; width: 95%" />
+      </div>
     </div>
-    <div><hr style="background-color: #f05d81; height: 2px; width: 95%" /></div>
+  </div>
+  <div *ngIf="userchat.length==0">
+    <span class="unavailable">No Users Available</span>
   </div>
 </ion-content>

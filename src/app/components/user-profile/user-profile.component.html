@@ -1,0 +1,30 @@
+<div class="outer-div">
+  <section class="header-section">
+    <section style="width: 90%">
+      <section class="center">
+        {{ userData?.first_name }} {{ userData?.last_name }}
+      </section>
+      <section class="center">@{{ userData?.username }}</section>
+    </section>
+    <section style="width: 10%" (click)="dismissModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </section>
+  </section>
+  <section class="image-section">
+    <img
+      [src]="
+        userData?.profileImage
+          ? userData?.profileImage
+          : '/assets/chats/user.jfif'
+      "
+    />
+  </section>
+  <section class="action-section">
+    <section (click)="goToChats()">
+      <ion-icon name="chatbox-outline"></ion-icon>
+    </section>
+    <section (click)="goToProfile()">
+      <ion-icon name="information-circle-outline"></ion-icon>
+    </section>
+  </section>
+</div>

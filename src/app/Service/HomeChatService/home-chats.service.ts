@@ -15,11 +15,18 @@ export class HomeChatsService {
       .valueChanges();
   }
   fetchUserChats(chattinuser, firebaseChatID) {
-  return   combineLatest(
+    return combineLatest(
       this.angularfire
         .collection(firebaseChatID, (ref) => ref.orderBy("Date", "asc"))
         .valueChanges(),
       this.angularfire.collection("users").doc(chattinuser).valueChanges()
     );
+  }
+  userData;
+  setUserData(Data) {
+    this.userData = Data;
+  }
+  getUserData() {
+    return this.userData;
   }
 }

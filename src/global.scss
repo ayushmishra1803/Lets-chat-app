@@ -68,3 +68,12 @@ ion-modal.loader {
 * {
   font-family: "Roboto Mono", monospace;
 }
+
+.my-custom-modal-optcss .modal-wrapper {
+  height: 400px;
+  width: 90%;
+  border-radius: 10px;
+  border: 2px solid #f30396;
+  color: white;
+  background-color: black;
+}

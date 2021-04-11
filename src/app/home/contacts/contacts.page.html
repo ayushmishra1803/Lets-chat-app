@@ -7,8 +7,10 @@
 <ion-content>
   <div class="heading">
     <ion-searchbar
+      (keyup)="searchFromContacts($event)"
       style="width: 90%"
       placeholder=" Quick Search"
+      (ionClear)="searchFromContacts($event)"
     ></ion-searchbar>
   </div>
   <section>
@@ -18,66 +20,13 @@
   <section>
     <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
   </section>
-  <div class="list" *ngFor="let conatct of UsersOnApp">
-    <div
-      class="listiteams"
-      (click)="GotChat(conatct)"
-      *ngIf="conatct.dbData.id != activeuser.id"
-    >
-      <section
-        style="
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          width: 100%;
-        "
+  <div *ngIf="UsersOnApp.length>0">
+    <div class="list" *ngFor="let conatct of UsersOnApp">
+      <div
+        class="listiteams"
+        (click)="GotChat(conatct)"
+        *ngIf="conatct.dbData.id != activeuser.id"
       >
-        <section style="display: flex; width: 100%; height: 100%">
-          <section>
-            <ion-avatar>
-              <ion-img
-                [src]="conatct.dbData.profileImage?conatct.dbData.profileImage:'/assets/chats/user.jfif'"
-              >
-              </ion-img>
-            </ion-avatar>
-          </section>
-          <section
-            style="
-              height: 100%;
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-              padding-left: 16px;
-            "
-          >
-            <section>
-              <span class="username"
-                >{{conatct.mobileData._objectInstance.displayName}}</span
-              >
-            </section>
-            <section>
-              <span class="userNumber"
-                >{{conatct.mobileData._objectInstance.phoneNumbers[0].value}}</span
-              >
-            </section>
-          </section>
-        </section>
-        <section>
-          <hr style="background-color: #f05d81; height: 2px; width: 95%" />
-        </section>
-      </section>
-    </div>
-  </div>
-  <div class="userNotOnApp">
-    <section>
-      <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
-    </section>
-    <span class="smallHeading">Invite</span>
-    <section>
-      <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
-    </section>
-    <div class="list" *ngFor="let conatct of UsersNotonApp">
-      <div class="listiteams">
         <section
           style="
             display: flex;
@@ -87,9 +36,12 @@
           "
         >
           <section style="display: flex; width: 100%; height: 100%">
-            <section style="width: 20%">
+            <section>
               <ion-avatar>
-                <ion-img src="/assets/chats/user.jfif"> </ion-img>
+                <ion-img
+                  [src]="conatct.dbData.profileImage?conatct.dbData.profileImage:'/assets/chats/user.jfif'"
+                >
+                </ion-img>
               </ion-avatar>
             </section>
             <section
@@ -99,50 +51,18 @@
                 flex-direction: column;
                 align-items: flex-start;
                 padding-left: 16px;
-                width: 60%;
               "
             >
-              <section
-                style="
-                  overflow: hidden;
-                  white-space: nowrap;
-                  text-overflow: ellipsis;
-                  width: 70%;
-                "
-              >
+              <section>
                 <span class="username"
                   >{{conatct.mobileData._objectInstance.displayName}}</span
                 >
               </section>
-              <section
-                style="
-                  overflow: hidden;
-                  white-space: nowrap;
-                  text-overflow: ellipsis;
-                "
-              >
+              <section>
                 <span class="userNumber"
                   >{{conatct.mobileData._objectInstance.phoneNumbers[0].value}}</span
                 >
               </section>
-            </section>
-            <section style="width: 20%">
-              <div
-                style="
-                  display: flex;
-                  justify-content: flex-end;
-                  height: 100%;
-                  align-items: center;
-                  box-sizing: border-box;
-                  padding-right: 5%;
-                "
-              >
-                <ion-icon
-                  name="paper-plane"
-                  color="light"
-                  (click)="inviteOthers()"
-                ></ion-icon>
-              </div>
             </section>
           </section>
           <section>
@@ -150,6 +70,98 @@
           </section>
         </section>
       </div>
+    </div>
+  </div>
+  <div *ngIf="UsersOnApp.length==0">
+    <span class="unavailable">No Contacts Available</span>
+  </div>
+  <div class="userNotOnApp">
+    <section>
+      <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
+    </section>
+    <span class="smallHeading">Invite</span>
+    <section>
+      <hr style="background-color: #f8f4f5; height: 2px; width: 95%" />
+    </section>
+    <div *ngIf="UsersNotonApp.length>0">
+      <div class="list" *ngFor="let conatct of UsersNotonApp">
+        <div class="listiteams">
+          <section
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              width: 100%;
+            "
+          >
+            <section style="display: flex; width: 100%; height: 100%">
+              <section style="width: 20%">
+                <ion-avatar>
+                  <ion-img src="/assets/chats/user.jfif"> </ion-img>
+                </ion-avatar>
+              </section>
+              <section
+                style="
+                  height: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  padding-left: 16px;
+                  width: 60%;
+                "
+              >
+                <section
+                  style="
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    width: 70%;
+                  "
+                >
+                  <span class="username"
+                    >{{conatct.mobileData._objectInstance.displayName}}</span
+                  >
+                </section>
+                <section
+                  style="
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                  "
+                >
+                  <span class="userNumber"
+                    >{{conatct.mobileData._objectInstance.phoneNumbers[0].value}}</span
+                  >
+                </section>
+              </section>
+              <section style="width: 20%">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: flex-end;
+                    height: 100%;
+                    align-items: center;
+                    box-sizing: border-box;
+                    padding-right: 5%;
+                  "
+                >
+                  <ion-icon
+                    name="paper-plane"
+                    color="light"
+                    (click)="inviteOthers()"
+                  ></ion-icon>
+                </div>
+              </section>
+            </section>
+            <section>
+              <hr style="background-color: #f05d81; height: 2px; width: 95%" />
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="UsersNotonApp.length==0">
+      <span class="unavailable">No Contacts Available</span>
     </div>
   </div>
 </ion-content>

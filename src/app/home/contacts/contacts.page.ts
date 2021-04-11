@@ -10,6 +10,7 @@ import { UserDataService } from "src/app/Service/userData/user-data.service";
 
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Router } from "@angular/router";
+import { HomeChatsService } from "src/app/Service/HomeChatService/home-chats.service";
 @Component({
   selector: "app-contacts",
   templateUrl: "./contacts.page.html",
@@ -23,7 +24,8 @@ export class ContactsPage implements OnInit, OnDestroy {
     private userData: UserDataService,
     private loading: LoadingService,
     private socailSharing: SocialSharing,
-    private router: Router
+    private router: Router,
+    private homeChatService: HomeChatsService
   ) {}
   ngOnDestroy(): void {
     throw new Error("Method not implemented.");
@@ -34,13 +36,15 @@ export class ContactsPage implements OnInit, OnDestroy {
   dbContactlistUser: any[] = [];
   dbLengthSubscription: Subscription;
   UsersOnApp: any[] = [];
+  SearchUsersOnApp: any[] = [];
+  SearchUsersNotonApp: any[] = [];
   UsersNotonApp: any[] = [];
   userContactList: any[] = [];
   dbLength: number;
   ContactOnAppPushedContacts = [];
   ContactNotOnAppPushedContacts = [];
   ngOnInit() {
-    this.activeuser=this.userData.getUserData();
+    this.activeuser = this.userData.getUserData();
     this.loading.showLoader();
     this.dbLengthSubscription = this.contactService
       .getLengthOfDataFromDb()
@@ -125,8 +129,6 @@ export class ContactsPage implements OnInit, OnDestroy {
                     currentConact.phoneNumbers.value
                   )
                 ) {
-                  console.log("not included");
-                  console.log(currentConact.phoneNumbers.value);
                   this.loading.hideLoader();
                   this.UsersOnApp.push({
                     mobileData: { ...currentConact },
@@ -142,8 +144,6 @@ export class ContactsPage implements OnInit, OnDestroy {
                     currentConact.phoneNumbers.value
                   )
                 ) {
-                  console.log("not included");
-                  console.log(currentConact.phoneNumbers.value);
                   this.loading.hideLoader();
                   this.UsersNotonApp.push({
                     mobileData: { ...currentConact },
@@ -156,9 +156,10 @@ export class ContactsPage implements OnInit, OnDestroy {
               }
             }
           });
-          console.log(this.ContactOnAppPushedContacts);
         });
       });
+      this.SearchUsersNotonApp = this.UsersNotonApp;
+      this.SearchUsersOnApp = this.UsersOnApp;
     });
   }
   inviteOthers() {
@@ -168,6 +169,23 @@ export class ContactsPage implements OnInit, OnDestroy {
       .catch((err) => {});
   }
   GotChat(contact) {
+    this.homeChatService.setUserData(contact.dbData);
     this.router.navigate(["/chating/" + contact.dbData.id]);
+  }
+  searchFromContacts(event) {
+    let search = event.target.value;
+    this.UsersOnApp = this.SearchUsersOnApp.filter((re) => {
+      return (
+        re.dbData.email.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+        re.dbData.first_name.toLowerCase().indexOf(search.toLowerCase()) > -1
+      );
+    });
+    this.UsersNotonApp = this.SearchUsersNotonApp.filter((re) => {
+      return (
+        re.mobileData._objectInstance.displayName
+          .toLowerCase()
+          .indexOf(search.toLowerCase()) > -1
+      );
+    });
   }
 }

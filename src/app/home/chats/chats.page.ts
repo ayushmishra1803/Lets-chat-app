@@ -1,6 +1,8 @@
 import { AfterContentInit, Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { ModalController } from "@ionic/angular";
 import { Subscription } from "rxjs";
+import { UserProfileComponent } from "src/app/components/user-profile/user-profile.component";
 import { HomeChatsService } from "src/app/Service/HomeChatService/home-chats.service";
 import { LoadingService } from "src/app/Service/loading/loading.service";
 import { UserDataService } from "src/app/Service/userData/user-data.service";
@@ -15,12 +17,14 @@ export class ChatsPage implements OnInit, AfterContentInit {
     private homeChattingService: HomeChatsService,
     private loading: LoadingService,
     private userData: UserDataService,
-    private router: Router
+    private router: Router,
+    private modal: ModalController
   ) {}
   usersChatSubscription = new Subscription();
   fetchingFirstTym = false;
   ngAfterContentInit(): void {
     this.userchat = [];
+    this.searchUserChat = this.userchat;
     this.activeUser = this.userData.getUserData();
     const userid = this.userData.getUserData().id;
     this.loading.showLoader();
@@ -39,6 +43,7 @@ export class ChatsPage implements OnInit, AfterContentInit {
   }
 
   userchat = [];
+  searchUserChat = [];
   activeUser;
   chatsSubscription = new Subscription();
   ngOnInit() {
@@ -48,10 +53,11 @@ export class ChatsPage implements OnInit, AfterContentInit {
   }
   fetchChats(userChatData: any[]) {
     this.userchat = [];
-
+    this.searchUserChat = [];
     userChatData.map((userSpecificChatId, index) => {
       if (index === 0) {
         this.userchat = [];
+        this.searchUserChat = [];
       }
 
       this.chatsSubscription.add(
@@ -92,15 +98,44 @@ export class ChatsPage implements OnInit, AfterContentInit {
                 }
               });
             }
+
+            this.searchUserChat = this.userchat;
           })
       );
     });
   }
-  goToChats(uuid) {
+  goToChats(uuid, user) {
+    this.homeChattingService.setUserData(user);
     this.router.navigate(["/chating/" + uuid]);
   }
   goToContacts() {
     this.router.navigate(["/home/contacts"]);
   }
- 
+  searchChat(event) {
+    let search = event.target.value;
+    console.log(this.searchUserChat);
+    this.userchat = this.searchUserChat.filter((re) => {
+      return (
+        re.userData.email.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+        re.userData.first_name.toLowerCase().indexOf(search.toLowerCase()) >
+          -1 ||
+        re.userData.last_name.toLowerCase().indexOf(search.toLowerCase()) > -1
+      );
+    });
+  }
+  async openProfileModal(id, data) {
+    this.homeChattingService.setUserData(data);
+    const modal = this.modal.create({
+      component: UserProfileComponent,
+      showBackdrop: true,
+      backdropDismiss: false,
+      animated: true,
+      cssClass: ["my-custom-modal-optcss modal-wrapper"],
+      componentProps: {
+        userData: data,
+        id: id,
+      },
+    });
+    (await modal).present();
+  }
 }

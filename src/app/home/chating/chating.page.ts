@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import { AngularFireMessaging } from "@angular/fire/messaging";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ModalController } from "@ionic/angular";
 import { ChattingLongHoldMenuComponent } from "src/app/components/chatting-long-hold-menu/chatting-long-hold-menu.component";
 import { ChattingService } from "src/app/Service/chattingService/chatting.service";
@@ -32,7 +32,8 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     private modalController: ModalController,
     private camera: Camera,
     private uploadPhotoService: ImageUploadService,
-    private speechRecognition: SpeechRecognition
+    private speechRecognition: SpeechRecognition,
+    private router: Router
   ) {}
   @ViewChild("chatInputONDOM", { static: false }) chatInput: ElementRef;
   EditMode: boolean = false;
@@ -259,5 +260,8 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
       .catch((err) => {
         console.log(err);
       });
+  }
+  goToProfile() {
+    this.router.navigate(["/profile-page"]);
   }
 }

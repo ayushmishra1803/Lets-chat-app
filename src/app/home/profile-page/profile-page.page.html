@@ -1,9 +1,54 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile-page</ion-title>
+    <div class="mainToolBarDiv">
+      <section class="avtarToolBardiv">
+        <section class="backSection">
+          <ion-buttons slot="start">
+            <ion-back-button color="light"></ion-back-button>
+          </ion-buttons>
+        </section>
+      </section>
+    </div>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <div class="userImage">
+    <section style="display: flex; flex-direction: column; align-items: center">
+      <div>
+        <section>
+          <img
+            [src]="UserData?.profileImage?UserData?.profileImage:'/assets/chats/user.jfif'"
+          />
+        </section>
+      </div>
 
+      <span class="username"
+        >{{UserData?.first_name|titlecase}} {{UserData?.last_name|titlecase}}
+      </span>
+      <span class="userData">@{{UserData?.username}} </span>
+    </section>
+  </div>
+  <div class="userDetail">
+    <ion-card>
+      <section class="detail">
+        <h3>Personal Information</h3>
+      </section>
+      <section class="detail">
+        <section class="userDataHeading">Status</section>
+        <section class="userData">
+          {{UserData?.status||"Currently using Let's Chat"}}
+        </section>
+      </section>
+      <section class="detail">
+        <section class="userDataHeading">Contact Number</section>
+        <section class="userData">
+          {{UserData?.mobileNumber||'Not Available'}}
+        </section>
+      </section>
+      <section class="detail">
+        <section class="userDataHeading">Email</section>
+        <section class="userData">{{UserData?.email||'Not Available'}}</section>
+      </section>
+    </ion-card>
+  </div>
 </ion-content>

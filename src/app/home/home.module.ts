@@ -9,7 +9,13 @@ import { ContactService } from "../Service/contact/contact.service";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule,AngularFirestoreModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    HomePageRoutingModule,
+    AngularFirestoreModule,
+  ],
   declarations: [HomePage],
   providers: [ContactService],
 })
