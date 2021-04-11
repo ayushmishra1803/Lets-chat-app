@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HomeChatsService } from "src/app/Service/HomeChatService/home-chats.service";
+import { ViewPhotoServiceService } from "src/app/Service/viewPhotoService/view-photo-service.service";
 
 @Component({
   selector: "app-profile-page",
@@ -8,10 +9,15 @@ import { HomeChatsService } from "src/app/Service/HomeChatService/home-chats.ser
 })
 export class ProfilePagePage implements OnInit {
   UserData;
-  constructor(private homeChattingService: HomeChatsService) {}
+  constructor(
+    private homeChattingService: HomeChatsService,
+    private photoViewImage: ViewPhotoServiceService
+  ) {}
 
   ngOnInit() {
     this.UserData = this.homeChattingService.getUserData();
-    console.log(this.UserData);
+  }
+  viewImage(src) {
+    this.photoViewImage.viewPhoto(src)
   }
 }

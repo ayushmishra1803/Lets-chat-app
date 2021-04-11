@@ -15,7 +15,9 @@
   <div class="userImage">
     <section style="display: flex; flex-direction: column; align-items: center">
       <div>
-        <section>
+        <section
+          (click)="viewImage(UserData?.profileImage?UserData?.profileImage:'/assets/chats/user.jfif')"
+        >
           <img
             [src]="UserData?.profileImage?UserData?.profileImage:'/assets/chats/user.jfif'"
           />
