@@ -198,11 +198,20 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     };
     this.camera.getPicture(options).then(
       (imageData) => {
-        this.uploadPhotoService.UploadImage(
-          imageData,
-          this.userData.getUserData().id,
-          this.chattingCollection
-        );
+        if (this.chattingCollection === "") {
+          this.uploadPhotoService.UploadImageIfChatDoesNotExist(
+            imageData,
+            this.userData.getUserData().id,
+            this.chatingUser,
+            this.userData.getUserData()
+          );
+        } else {
+          this.uploadPhotoService.UploadImage(
+            imageData,
+            this.userData.getUserData().id,
+            this.chattingCollection
+          );
+        }
       },
       (err) => {
         console.error(err);
@@ -210,8 +219,6 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
     );
   }
   async viewPhoto(src) {
-    console.log(src);
-
     const modal = await this.modalController.create({
       component: ViewerModalComponent,
       componentProps: {
@@ -258,14 +265,23 @@ export class ChatingPage implements OnInit, AfterContentInit, AfterViewChecked {
         targetHeight: 500,
       })
       .then((imageData) => {
-        this.uploadPhotoService.UploadImage(
-          imageData,
-          this.userData.getUserData().id,
-          this.chattingCollection
-        );
+        if (this.chattingCollection === "") {
+          this.uploadPhotoService.UploadImageIfChatDoesNotExist(
+            imageData,
+            this.userData.getUserData().id,
+            this.chatingUser,
+            this.userData.getUserData()
+          );
+        } else {
+          this.uploadPhotoService.UploadImage(
+            imageData,
+            this.userData.getUserData().id,
+            this.chattingCollection
+          );
+        }
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }
   goToProfile() {

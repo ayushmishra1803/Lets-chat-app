@@ -50,7 +50,36 @@ export class ImageUploadService {
             Date: new Date(),
             message: "Photo",
           };
+
           this.chattingService.addMessgaesIfChatExist(collectionId, data);
+        });
+      });
+  }
+  UploadImageIfChatDoesNotExist(
+    imageData,
+    SenderUuid,
+    chattinguser,
+    activeuser
+  ) {
+    const uniqueuuid = Math.random().toString();
+    const storage = this.angularStorage.storage.ref(`photos/${uniqueuuid}`);
+    storage
+      .putString(imageData, "base64", {
+        contentType: "image/jpeg",
+      })
+      .then((uploaded) => {
+        const ref = this.angularStorage.ref(`photos/${uniqueuuid}`);
+        ref.getDownloadURL().subscribe((url) => {
+          // console.log(url);
+          const data = {
+            messageType: "Image",
+            imageUrl: url,
+            sender: SenderUuid,
+            Date: new Date(),
+            message: "Photo",
+          };
+
+          this.chattingService.FirstTymChat(chattinguser, activeuser, data);
         });
       });
   }
