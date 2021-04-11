@@ -113,6 +113,8 @@ export class ContactsPage implements OnInit, OnDestroy {
 
             //
             //
+          } else {
+            currentConact.phoneNumbers.value = number.value;
           }
 
           this.dbContactlistUser.map((userontheApp) => {
