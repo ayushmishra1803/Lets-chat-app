@@ -70,7 +70,6 @@ export class ImageUploadService {
       .then((uploaded) => {
         const ref = this.angularStorage.ref(`photos/${uniqueuuid}`);
         ref.getDownloadURL().subscribe((url) => {
-          // console.log(url);
           const data = {
             messageType: "Image",
             imageUrl: url,
