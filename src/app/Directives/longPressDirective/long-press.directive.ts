@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Input,
   NgZone,
-  OnInit,
   Output,
 } from "@angular/core";
 import { GestureController } from "@ionic/angular";
@@ -20,9 +19,6 @@ export class LongPressDirective implements AfterViewInit {
     private zone: NgZone
   ) {}
 
-
-
-  
   @Output() longPress = new EventEmitter();
   @Input("delay") delay = 500;
   action: any;
