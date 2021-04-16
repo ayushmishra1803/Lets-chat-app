@@ -19,6 +19,10 @@ export class LongPressDirective implements AfterViewInit {
     private ElementRef: ElementRef,
     private zone: NgZone
   ) {}
+
+
+
+  
   @Output() longPress = new EventEmitter();
   @Input("delay") delay = 500;
   action: any;
