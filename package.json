@@ -24,7 +24,6 @@
     "@ionic-native/contacts": "^5.30.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/crop": "^5.31.1",
-    "@ionic-native/fcm": "^5.31.1",
     "@ionic-native/file": "^5.31.1",
     "@ionic-native/social-sharing": "^5.31.1",
     "@ionic-native/speech-recognition": "^5.32.0",
@@ -58,7 +57,6 @@
     "cordova-plugin-contacts": "^3.0.1",
     "cordova-plugin-crop": "^0.4.0",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-fcm-with-dependecy-updated": "^7.8.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
@@ -101,13 +99,6 @@
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {
-        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher",
-        "ANDROID_FCM_VERSION": "21.0.0",
-        "ANDROID_FIREBASE_BOM_VERSION": "26.0.0",
-        "ANDROID_GOOGLE_SERVICES_VERSION": "4.3.4",
-        "ANDROID_GRADLE_TOOLS_VERSION": "4.1.0"
-      },
       "cordova-plugin-x-socialsharing": {},
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"

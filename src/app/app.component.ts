@@ -3,7 +3,6 @@ import { Component } from "@angular/core";
 import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
-import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic";
 import { FcmTokenService } from "./Service/tokenService/fcm-token.service";
 
 import { Storage } from "@ionic/storage";
@@ -61,7 +60,7 @@ export class AppComponent {
   }
   //This Method is responsible for the fcm token used for Push notifications
   tokenInit() {
-    FCM.getToken()
+   /*  FCM.getToken()
       .then((token) => {
         console.log(token);
         this.fcmToken.setToken(token);
@@ -82,6 +81,6 @@ export class AppComponent {
       if (hasPermission) {
         console.log("Has permission!");
       }
-    });
+    }); */
   }
 }
